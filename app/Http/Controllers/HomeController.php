@@ -16,6 +16,6 @@ class HomeController extends Controller
     }
     public function dashboard()
     {
-        return Auth::user();
+        return view('step1');
     }
 }

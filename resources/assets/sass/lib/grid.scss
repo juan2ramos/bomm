@@ -37,7 +37,12 @@ $totalContainer: 100%;
     flex-direction: row-reverse;
   }
 }
-
+.col {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  flex-direction: column;
+}
 .col.reverse {
   -webkit-flex-direction: column-reverse;
   -ms-flex-direction: column-reverse;

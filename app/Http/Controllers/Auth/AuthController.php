@@ -68,7 +68,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'nombre' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
@@ -95,7 +95,7 @@ class AuthController extends Controller
 
         $user = $this->create($request->all());
 
-        if($user->role_id == 3){
+        /*if($user->role_id == 3){
             $agent = Agent::with('providers')->get()->sortBy(function($agent){return $agent->providers()->count();})->first();
             $provider = new Provider;
             $provider->agent_id = $agent->id;
@@ -105,7 +105,7 @@ class AuthController extends Controller
 
         Mail::send('emails.welcome', ['user' => $user], function ($m) use ($user) {
             $m->to($user->email, $user->name)->subject('Bienvenido!');
-        });
+        });*/
 
         auth()->loginUsingId($user->id);
         return redirect($this->redirectPath());

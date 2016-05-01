@@ -32,7 +32,7 @@
             <div class="Form-inputs">
                 <label for="name" class="row middle">
                     <span class="col-5 cols-12">* Nombre del grupo o artista:</span>
-                    <input class="col-6" type="text" id="name" name="nombre">
+                    <input class="col-6" type="text" id="name" name="name">
 
                 </label>
                 <label for="email" class="row middle">
@@ -51,7 +51,7 @@
                 </label>
                 <label for="password" class="row middle">
                     <span class="col-5 cols-12">* Contraseña:</span>
-                    <input class="col-6" type="text" id="password" name="password">
+                    <input class="col-6" type="password" id="password" name="password">
                     <em>?
                         <span>
                             Máximo 12 caracteres
@@ -60,7 +60,7 @@
                 </label>
                 <label for="password_confirmation" class="row middle">
                     <span class="col-5 cols-12">* Repetir contraseña:</span>
-                    <input class="col-6" type="text" id="password_confirmation" name="password_confirmation">
+                    <input class="col-6" type="password" id="password_confirmation" name="password_confirmation">
                     <em>?
                         <span>
                             Máximo 12 caracteres

@@ -1,5 +1,5 @@
 .Header {
-  margin: rem(16) 0;
+  margin: rem(16) 0 0;
 }
 .Header-barInfo{
   background: $red;
@@ -30,6 +30,7 @@
   background: linear-gradient(to bottom,  #ffffff 0%,#e0e0e0 100%);
   width: 100%;
   height: rem(32);
+  padding: 0 rem(34);
 }
 
 .Footer{
