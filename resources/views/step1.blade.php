@@ -14,14 +14,19 @@
             asdasd
         </div>
         <div class="col-7 Form-inputs">
-            <label for="password" class="row middle">
-                <span class="col-5 cols-12">* Contraseña:</span>
-                <input class="col-6" type="password" id="password" name="password">
-                <em>?
-                        <span>
-                            Máximo 12 caracteres
-                        </span>
-                </em>
+            <label for="" class="row middle">
+                <span class="col-5 cols-12">* Nombre del artista o grupo:</span>
+                <input class="col-6" type="text" id="name" name="name">
+                <em>?<span>Máximo 12 caracteres</span></em>
+            </label>
+            <label for="resena" class="row middle">
+                <span class="col-12 cols-12">* Escribe una breve reseña de la agrupación o artista: (700 caracteres)</span>
+                <textarea class="col-11 cols-12" name="resena"></textarea>
+            </label>
+            <label for="" class="row middle">
+                <span class="col-5 cols-12">* Tipo </span>
+                <input class="col-6" type="text" id="name" name="name">
+                <em>?<span>Máximo 12 caracteres</span></em>
             </label>
         </div>
     </form>

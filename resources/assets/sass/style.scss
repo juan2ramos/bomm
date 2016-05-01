@@ -87,9 +87,13 @@ hr {
     }
   }
 }
-
 .Form-inputs {
   margin: rem(30) 0;
+  textarea {
+    margin: rem(8) 0 0;
+    height: rem(100);
+    padding: rem(8);
+  }
   input {
     border: rem(1) solid #999;
     background-color: #fff;
@@ -137,8 +141,8 @@ hr {
       }
     }
   }
-}
 
+}
 .Logout{
   display: block;
   text-align: right;
