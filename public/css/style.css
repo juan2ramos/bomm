@@ -364,16 +364,17 @@ button {
   font-size: 0.75rem;
   color: #777777;
   line-height: 1.25rem; }
-  .Footer .Footer-info {
-    color: black;
-    font-weight: bold;
-    max-width: 50rem; }
   .Footer div {
     margin: 0.75rem 0; }
   .Footer a {
     color: #be0f34;
     text-decoration: underline;
     font-weight: normal; }
+
+.Footer-info {
+  color: black;
+  font-weight: bold;
+  max-width: 81%; }
 
 body {
   font-size: 13px; }
@@ -417,33 +418,34 @@ hr {
   line-height: 0.875rem;
   margin-top: 3rem; }
 
-.ContentForms button {
-  background: #C0C0C0;
-  color: #665;
-  border: #999;
-  padding: 0.625rem 0.625rem 0.5rem; }
-  .ContentForms button:hover {
-    color: white;
-    background: #be0f34;
-    border-color: #be0f34; }
-
 .ContentForms a {
   color: #be0f34; }
   .ContentForms a:hover {
     text-decoration: underline; }
 
-.ContentForms .ContentForms-p {
-  margin: 2rem 0 1.5rem; }
-
-.ContentForms form:first-of-type h2 {
-  margin-right: 0.25rem; }
-
-.ContentForms form:last-of-type h2 {
-  margin-left: 0.25rem; }
+.Button {
+  background: #C0C0C0;
+  color: #665;
+  border: #999;
+  padding: 0.625rem 0.625rem 0.5rem; }
+  .Button:hover {
+    color: white;
+    background: #be0f34;
+    border-color: #be0f34; }
+  .Button .ContentForms-p {
+    margin: 2rem 0 1.5rem; }
+  .Button form:first-of-type h2 {
+    margin-right: 0.25rem; }
+  .Button form:last-of-type h2 {
+    margin-left: 0.25rem; }
 
 .Form-inputs {
   margin: 1.875rem 0; }
-  .Form-inputs input {
+  .Form-inputs textarea {
+    margin: 0.5rem 0 0;
+    height: 6.25rem;
+    padding: 0.5rem; }
+  .Form-inputs input, .Form-inputs select {
     border: 0.0625rem solid #999;
     background-color: #fff;
     padding: 0.25rem;
@@ -552,5 +554,60 @@ hr {
 
 .Progress-val {
   margin-left: 0.25rem; }
+
+.steps .image-p {
+  max-width: 79%;
+  margin: 50px auto 10px;
+  color: #be0f34; }
+
+.steps input.file {
+  opacity: 0;
+  width: calc(100% - 16px); }
+
+.steps .FigureInputImage {
+  position: absolute;
+  border: 0.0625rem dashed #979797;
+  border-radius: 0.125rem;
+  width: calc(80%);
+  top: 0;
+  height: 11.53125rem;
+  overflow: hidden;
+  margin-left: 10%;
+  z-index: -1; }
+
+.steps output {
+  display: block;
+  left: 10.4%;
+  overflow: hidden;
+  position: absolute;
+  top: 1px;
+  z-index: -1; }
+
+.steps label {
+  position: relative; }
+  .steps label em span {
+    left: -13.125rem;
+    z-index: 2;
+    width: 13rem; }
+
+.Record div:first-child {
+  padding-right: 0.125rem; }
+
+.Record div:last-child {
+  padding-left: 0.125rem; }
+
+.Record label {
+  padding: 0 0.375rem; }
+
+.Record a {
+  color: #be0f34; }
+  .Record a:hover {
+    text-decoration: underline; }
+
+.Terms label {
+  display: block; }
+
+.Terms input, .Terms select {
+  width: auto; }
 
 /*# sourceMappingURL=style.css.map */

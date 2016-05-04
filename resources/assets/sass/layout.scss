@@ -37,11 +37,7 @@
   font-size: rem(12);
   color: rgb(119, 119, 119);
   line-height: rem(20);
-  .Footer-info{
-    color: black;
-    font-weight: bold;
-    max-width: rem(800);
-  }
+
   div{
     margin: rem(12) 0;
   }
@@ -50,4 +46,9 @@
     text-decoration: underline;
     font-weight: normal;
   }
+}
+.Footer-info{
+  color: black;
+  font-weight: bold;
+  max-width: 81%;
 }

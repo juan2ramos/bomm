@@ -20,7 +20,7 @@
             <img src="{{url('images/logo_ccb.jpg')}}" alt="Logo Camara de Comercio de Bogotá">
         </figure>
         <h1 class="Header-barInfo">
-            Bogotá Music Market - BOmm 2015 - Inscripciones
+            Bogotá Music Market - BOmm 2016 - Inscripciones
         </h1>
         <div class="Header-route">
             <a href="http://www.bogotamusicmarket.com/">Inicio</a> <span> > </span> Información BOmm
@@ -78,7 +78,7 @@
 </main>
 
 
-<script src="{{asset('js/jquery-1.11.2.min.js')}}"></script>
+<script src="{{asset('http://code.jquery.com/jquery-1.11.2.min.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

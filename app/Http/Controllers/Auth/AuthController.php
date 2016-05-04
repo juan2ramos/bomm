@@ -3,6 +3,8 @@
 namespace Bomm\Http\Controllers\Auth;
 
 use Bomm\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Validator;
 use Bomm\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -73,6 +75,12 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    public function getLogout()
+    {
+        Auth::Logout();
+        Session::flush();
+        return redirect('/');
+    }
     /**
      * Get the post register / login redirect path.
      *
@@ -80,6 +88,10 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
+
+        if (!is_null($group = Auth::user()->musics()->first())) {
+            Session::put('idGroup', $group->id);
+        }
         return route('dashboard');
     }
 
