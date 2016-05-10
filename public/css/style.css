@@ -442,7 +442,7 @@ hr {
 .Form-inputs {
   margin: 1.875rem 0; }
   .Form-inputs textarea {
-    margin: 0.5rem 0 0;
+    margin: 0.5rem 0 0.5rem;
     height: 6.25rem;
     padding: 0.5rem; }
   .Form-inputs input, .Form-inputs select {
@@ -548,7 +548,7 @@ hr {
   overflow: hidden; }
   .Progress-bar span {
     display: block;
-    width: 50%;
+    width: 0;
     background: #be0f34;
     height: 100%; }
 
@@ -609,5 +609,11 @@ hr {
 
 .Terms input, .Terms select {
   width: auto; }
+
+.limiterBox {
+  color: #be0f34; }
+
+#social input[type='text'], #social em {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

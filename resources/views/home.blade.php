@@ -39,6 +39,10 @@
                     <span class="col-5 cols-12">* Correo electrónico:</span>
                     <input class="col-6" type="text" id="email" name="email">
                 </label>
+                <label for="email_confirmation" class="row middle">
+                    <span class="col-5 cols-12">* Repetir correo electrónico:</span>
+                    <input class="col-6" type="text" id="email_confirmation" name="email_confirmation">
+                </label>
 
                 <label for="password" class="row middle">
                     <span class="col-5 cols-12">* Contraseña:</span>

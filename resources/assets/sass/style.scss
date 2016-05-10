@@ -53,6 +53,7 @@ hr {
   line-height: rem(14);
   margin-top: rem(48);
 }
+
 .ContentForms {
   a {
     color: $red;
@@ -61,6 +62,7 @@ hr {
     }
   }
 }
+
 .Button {
   background: #C0C0C0;
   color: #665;
@@ -92,7 +94,7 @@ hr {
 .Form-inputs {
   margin: rem(30) 0;
   textarea {
-    margin: rem(8) 0 0;
+    margin: rem(8) 0 rem(8);
     height: rem(100);
     padding: rem(8);
   }
@@ -221,7 +223,7 @@ hr {
   overflow: hidden;
   span {
     display: block;
-    width: 50%;
+    width: 0;
     background: $red;
     height: 100%;
   }
@@ -297,5 +299,13 @@ hr {
   }
 }
 
+.limiterBox {
+  color: $red;
+}
 
+#social {
+  input[type='text'], em {
+    display: none;
+  }
+}
 

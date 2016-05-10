@@ -2,6 +2,7 @@
 
 namespace Bomm;
 
+use Bomm\entities\Group;
 use Bomm\entities\Music;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -24,8 +25,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
     public function musics(){
         return $this->belongsToMany(Music::class, 'usuarios_grupos_musica','id_usuario','id_grupo_musica');
+    }
+    public function group(){
+        return $this->hasOne(Group::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Bomm\Http\Controllers\Auth;
 
+use Bomm\entities\Group;
 use Bomm\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -91,6 +92,13 @@ class AuthController extends Controller
 
         if (!is_null($group = Auth::user()->musics()->first())) {
             Session::put('idGroup', $group->id);
+            Session::put('antique', 1);
+            return route('dashboard');
+        }
+        if (!is_null($group =  Auth::user()->group()->first())) {
+            Session::put('idGroup', $group->id);
+            Session::put('antique', 0);
+            return route('dashboard');
         }
         return route('dashboard');
     }

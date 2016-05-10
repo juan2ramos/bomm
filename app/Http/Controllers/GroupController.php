@@ -3,6 +3,7 @@
 namespace Bomm\Http\Controllers;
 
 use Bomm\Entities\Country;
+use Bomm\entities\Group;
 use Bomm\entities\Music;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,14 @@ use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller
 {
-    private $groupMusic;
+    private $group;
 
     public function __construct()
     {
+        $this->group = (Session::get('antique')) ?
+            Music::find(Session::get('idGroup'))->normalizeData():
+            Group::find(Session::get('idGroup'));
 
-        $this->groupMusic = Music::find(Session::get('idGroup'));
     }
 
     public function uploadPdfArtist(Request $request)
@@ -30,7 +33,7 @@ class GroupController extends Controller
 
     public function stepOne(Request $request)
     {
-        return view('step1', ['group' => $this->groupMusic]);
+        return view('step1', ['group' => $this->group]);
     }
 
     public function stepTwo()
