@@ -22,39 +22,58 @@
         <span class="Progress-val"></span>
     </div>
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
+    @if (count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+
+    @endif
     <form action="{{route('stepOne')}}" enctype="multipart/form-data" method="post" id="upload_form" class="row steps">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="col-4">
-            <label for="image1" class="col-3">
+            <label for="photoGroup" class="col-3">
                 <p class="image-p">!Haz clic o arrastra la imagen en jpg o png de tu grupo¡</p>
-                <input  type="file" class="file required" name="image1" id="image1">
+                <input type="file" class="file" name="photoGroup" id="photoGroup">
+
                 <figure class="FigureInputImage row middle center">
-                    <svg width="81px" height="47px">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#imageTemp"></use>
-                    </svg>
+                    @if(!$group->image)
+                        <svg width="81px" height="47px">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#imageTemp"></use>
+                        </svg>
+                    @endif
                 </figure>
-                <output class="result"></output>
+
+                <output class="result">
+                    <input type="hidden" id="imageHidden" class="required" name="image" value="{{$group->image}}">
+                    @if($group->image)
+                        <figure><img class="thumbnail" src="{{url('uploads/photoGroups/' . $group->image)}}" alt="">
+                        </figure>
+                    @endif
+                </output>
+
             </label>
         </div>
         <div class="col-8 Form-inputs">
             <label for="name" class="row middle">
                 <span class="col-5 cols-12">* Nombre del artista o grupo:</span>
-                <input  class="col-6 required" type="text" id="name" name="name" value="{{$group->name}}">
+                <input class="col-6 required" type="text" id="name" name="name" value="{{$group->name}}">
             </label>
             <label for="short_review" class="row middle">
                 <span class="col-12 cols-12">* Escribe una breve reseña de la agrupación o artista: (700 caracteres)</span>
-                <textarea  class="col-11 cols-12 required" id="short_review"
+                <textarea class="col-11 cols-12 required" id="short_review"
                           name="short_review">{{$group->short_review}}</textarea>
             </label>
             <label for="short_review_en" class="row middle">
                 <span class="col-12 cols-12">* Escribe una breve reseña en ingles de la agrupación o artista: (700 caracteres)</span>
-                <textarea  class="col-11 cols-12 required" id="short_review_en"
+                <textarea class="col-11 cols-12 required" id="short_review_en"
                           name="short_review_en">{{$group->short_review_en}}</textarea>
             </label>
-            <label for="type_proposal" class="row middle">
+            <label for="type_proposal" id="proposal" class="row middle">
                 <span class="col-5  cols-12">* Tipo de propuesta: </span>
 
-                <select  id="type_proposal" name="type_proposal" class="col-6 required"
+                <select id="type_proposal" name="type_proposal" class="col-6 required"
                         title="Selecciona el tipo de propuesta">
                     <option value="">Selecciona...</option>
                     <option value="1" {{$group->type_proposal == 1 ? 'selected' : ''}}>Cantante/Solista</option>
@@ -65,14 +84,14 @@
                 </select>
                 <em>?<span>Máximo 12 caracteres</span></em>
             </label>
-            <label for="other_proposal" class="row middle">
+            <label for="other_proposal" id="otherProposal" class="row middle">
                 <span class="col-5 cols-12">Si has respondido "Otro", por favor indica cuál:</span>
                 <input class="col-6" type="text" id="other_proposal" name="other_proposal"
                        value="{{$group->other_proposal}}">
             </label>
             <label for="genre" class="row middle">
                 <span class="col-5  cols-12">* Género:</span>
-                <select  id="genre" name="genre" class="required col-6" title="Selecciona el tipo de género">
+                <select id="genre" name="genre" class="required col-6" title="Selecciona el tipo de género">
                     <option value="">Selecciona...</option>
                     <option value="1" {{$group->genre == 1 ? 'selected' : ''}}>Balada</option>
                     <option value="40" {{$group->genre == 40 ? 'selected' : ''}}>Bachata</option>
@@ -110,14 +129,16 @@
             </label>
             <label for="pdfArtist" class="row middle">
                 <span class="col-5 cols-12">* Presentación del grupo/artista en un solo archivo PDF:</span>
-                <input  data-url="{{route('uploadPdfArtist')}}" class="required col-6" type="file" id="pdfArtist"
+                <input data-url="{{route('uploadPdfArtist')}}" class=" col-6" type="file" id="pdfArtist"
                        name="pdfArtist">
-                <input type="hidden" name="pdf" id="pdfNameInput">
                 <em>?<span>Se sugiere que como mínimo debe contener los siguientes componentes: Pitch (un párrafo que reseña la propuesta), el EPK (EPK significa Electronic Press Kit por sus siglas en inglés. Es una herramienta promocional en la que se incluye la biografía de la banda, fotos, información de contacto de la banda, manager, discografía, entre otros), y el Rider Técnico, la relación de los requerimientos mínimos para llevar a cabo una presentación en vivo del grupo/artista (si aplica)</span></em>
             </label>
+
+            <input type="hidden" class="required" name="pdf" id="pdfNameInput" value="{{$group->pdf}}">
+            <div id="pdf" class="col-11"></div>
             <label for="website" class="row middle">
                 <span class="col-5 cols-12">Sitio web:</span>
-                <input  class="col-6 required" type="text" id="website" name="website" value="{{$group->website}}">
+                <input class="col-6 required" type="text" id="website" name="website" value="{{$group->website}}">
             </label>
             <p class="col-11">
                 Envíanos las dos redes sociales que más usas. Ten en cuenta que los curadores asignan el puntaje de
@@ -128,6 +149,21 @@
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Facebook:</span>
                     <input class="col-6" type="text" id="facebook" name="facebook" value="{{$group->facebook}}">
                     <em>?<span>Recuerda que la dirección de tu facebook debe estar de esta forma https://www.facebook.com/XXXXX</span></em>
+                    <p class="col-6 offset-5 facebook-p">
+                        Para el envío de un enlace de Facebook, por favor incluir un texto que advierte “Ten
+
+                        presente que solo se evaluarán las páginas de Facebook (Fanpage) de tu proyecto musical.
+
+                        Los curadores no asignarán puntaje a un perfil personal de Facebook. 
+
+                        Si tienes un perfil personal promocionando tu proyecto musical, te sugerimos que lo
+
+                        conviertas a un Fanpage y así podrás recibir el puntaje correspondiente a este
+
+                        requisito. Para más información consulta:
+
+                        <a href="https://www.facebook.com/help/116067818477568" target="_blank">https://www.facebook.com/help/116067818477568</a>
+                    </p>
                 </label>
                 <label for="twitter" class="row middle">
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Twitter</span>
@@ -142,16 +178,16 @@
             </div>
             <label for="manager" class="row middle">
                 <span class="col-5 cols-12">* Manager o representante:</span>
-                <input  class="col-6 required" type="text" id="manager" name="manager" value="{{$group->manager}}">
+                <input class="col-6 required" type="text" id="manager" name="manager" value="{{$group->manager}}">
                 <em>? <span>Indica si tienes un manager que representa tu agrupación</span></em>
             </label>
             <label for="show_cost" class="row middle">
                 <span class="col-5 cols-12">¿Cuánto cuesta tu show en vivo? (sin contemplar gastos de traslado a otra ciudad)</span>
-                <input  class="col-6 required" type="text" id="show_cost" name="show_cost" value="{{$group->show_cost}}">
+                <input class="col-6 required" type="text" id="show_cost" name="show_cost" value="{{$group->show_cost}}">
             </label>
             <label for="showcases" class="row middle">
                 <span class="col-5 cols-12">* Indica si quieres que tu propuesta sea evaluada para participar en los showcases:</span>
-                <select  id="showcases" class="col-6 required" name="showcases"
+                <select id="showcases" class="col-6 required" name="showcases"
                         title="Indica si quieres que tu propuesta sea evaluada para participar en los showcases">
                     <option value="">Selecciona...</option>
                     <option value="1" {{($group->showcases == 1 ? 'selected' : '' )}}>Sí</option>
@@ -161,8 +197,8 @@
             </label>
         </div>
         <div class="offset-9 col-3 ">
-            <button class="Button">GUARDAR DATOS</button>
-            <a class="Button">CONTINUAR</a>
+            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button">
         </div>
     </form>
 @endsection
@@ -171,5 +207,18 @@
     <script src="{{asset('js/images.js')}}"></script>
     <script src="{{asset('js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
     <script src="{{asset('js/forms.js')}}"></script>
+    <script>
+        @if($group->pdf)
+        $('#pdf').css({'height': '500px'});
+        PDFObject.embed('uploads/pdfGroups/' + $('#pdfNameInput').val(), "#pdf", {
+            page: 1,
+            pdfOpenParams: {
+                navpanes: 1,
+                view: "FitH",
+                pagemode: "thumbs"
+            }
+        });
+        @endif
+    </script>
 
 @endsection

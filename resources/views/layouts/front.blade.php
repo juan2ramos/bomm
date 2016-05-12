@@ -30,10 +30,10 @@
 
         <ul class="row middle Steps">
             <li>pasos de <br>Inscripción</li>
-            <li><a class="current" href="">Datos básicos artista o grupo</a></li>
-            <li><a href="">Datos representante rueda de negocios </a></li>
-            <li><a href="">Grabaciones</a></li>
-            <li><a href="">Aceptación términos y condiciones </a></li>
+            <li><a class="{{($step == 1)? 'current':''}}" href="{{route('dashboard')}}">Datos básicos artista o grupo</a></li>
+            <li><a class="{{($step == 2)? 'current':''}}" href="{{route('stepTwo')}}">Datos representante rueda de negocios </a></li>
+            <li><a class="{{($step == 3)? 'current':''}}" href="{{route('stepThree')}}">Grabaciones</a></li>
+            <li><a class="{{($step == 4)? 'current':''}}" href="{{route('stepFour')}}">Aceptación términos y condiciones </a></li>
         </ul>
         @endif
         <div class="Header-bar row middle end">

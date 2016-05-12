@@ -113,8 +113,8 @@ $("#pdfArtist").on("change", function (event) {
             if (data.success) {
                 $('#pdf').css({'height': '500px'});
                 $('#pdfNameInput').val(data.name);
-                PDFObject.embed('http://bomm.app/uploads/pdfGroups/reQbKT3BBP01Guk0FZ3UBs2WXjp3Dq673r2Iw2Jj**CertificadoAportes.Por.Cotizante.CC.80921505.pdf', "#pdf", {
-                    page: 2,
+                PDFObject.embed(data.url, "#pdf", {
+                    page: 1,
                     pdfOpenParams: {
                         navpanes: 1,
                         view: "FitH",

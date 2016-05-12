@@ -22,50 +22,55 @@
         <span class="Progress-val">100%</span>
     </div>
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
-    <form action="{{route('stepOne')}}" enctype="multipart/form-data" method="post" id="upload_form"
+    <form action="{{route('stepThreePost')}}" enctype="multipart/form-data" method="post" id="upload_form"
           class="steps Form-inputs">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
         <label for="producer" class="  row middle col-12">
             <span class="col-12 cols-12">* Productor(es) <br>(500 caracteres):</span>
-            <textarea class="col-12 cols-12" id="producer" name="producer"></textarea>
+            <textarea class="col-12 cols-12 required" id="producer" name="producer">{{$group->producer}}</textarea>
         </label>
         <div class="Record row ">
-            <div class="col-6"><h3 class="title">* Audios online [SoundCloud - Reverbnation]
+            <div class="col-6" id="Audios"><h3 class="title">* Audios online [SoundCloud - Reverbnation]
                     <a href="http://ruedadenegocios.bogotamusicmarket.com/pdf/manualAudioBOmm.pdf" target="_blank">Ver manual</a></h3>
-                <label for="embed1" class="row middle col-12">
+                <label for="audio1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
-                    <textarea class="col-12 cols-12" id="embed1" name="embed1"></textarea>
+                    <textarea class="col-12 cols-12" id="audio1" name="audio1">{{$group->audio1}}</textarea>
                 </label>
-                <label for="embed2" class="row middle col-12">
+                <label for="audio2" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 2:</span>
-                    <textarea class="col-12 cols-12" id="embed2" name="embed2"></textarea>
+                    <textarea class="col-12 cols-12" id="audio2" name="audio2">{{$group->audio2}}</textarea>
                 </label>
-                <label for="embed3" class="row middle col-12">
+                <label for="audio3" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 3:</span>
-                    <textarea class="col-12 cols-12" id="embed3" name="embed3"></textarea>
+                    <textarea class="col-12 cols-12" id="audio3" name="audio3">{{$group->audio3}}</textarea>
                 </label>
             </div>
-            <div class="col-6"><h3 class="title">* Video [Youtube - Vimeo]
+            <div class="col-6" id="Videos"><h3 class="title">* Video [Youtube - Vimeo]
                     <a href="http://ruedadenegocios.bogotamusicmarket.com/pdf/manualVideoBOmm.pdf" target="_blank">Ver manual</a></h3>
-                <label for="embed4" class="row middle col-12">
+                <label for="video1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
-                    <textarea class="col-12 cols-12" id="embed4" name="embed4"></textarea>
+                    <textarea class="col-12 cols-12" id="video1" name="video1">{{$group->video1}}</textarea>
                 </label>
-                <label for="embed5" class="row middle col-12">
+                <label for="video2" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 2:</span>
-                    <textarea class="col-12 cols-12" id="embed5" name="embed5"></textarea>
+                    <textarea class="col-12 cols-12" id="video2" name="video2">{{$group->video2}}</textarea>
                 </label>
 
-                <label for="embed6" class="row middle col-12">
+                <label for="video3" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 3:</span>
-                    <textarea class="col-12 cols-12" id="embed6" name="embed6"></textarea>
+                    <textarea class="col-12 cols-12" id="video3" name="video3">{{$group->video3}}</textarea>
                 </label>
             </div>
+
+        </div>
+        <div class="offset-9 col-3 ">
+            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button">
         </div>
     </form>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/pdfobject.min.js')}}"></script>
-    <script src="{{asset('js/images.js')}}"></script>
+    <script src="{{asset('js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
+    <script src="{{asset('js/forms2.js')}}"></script>
 @endsection

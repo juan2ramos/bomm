@@ -22,28 +22,31 @@
         <span class="Progress-val">100%</span>
     </div>
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
-    <form action="{{route('stepOne')}}" enctype="multipart/form-data" method="post" id="upload_form"
+    <form action="{{route('stepFourPost')}}" enctype="multipart/form-data" method="post" id="upload_form"
           class="steps Form-inputs Terms">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
         <p>¿Actualmente estás recibiendo  servicios empresariales de la Cámara de Comercio para mejorar la viabilidad
             económica de tu proyecto?
-            <select  name="services" title="Selecciona la respuesta">
-                <option value="" selected="">Selecciona...</option>
-                <option value="1">Sí</option>
-                <option value="2">No</option>
+            <select  name="services" class="required" title="Selecciona la respuesta">
+                <option value="">Selecciona...</option>
+                <option value="1" {{($group->services == 1) ?'selected':''}}>Sí</option>
+                <option value="2" {{($group->services == 2) ?'selected':''}}>No</option>
             </select>
         </p>
         <label for="terms">
-            <input type="checkbox" name="terms" id="terms"> * He leído y acepto los Términos y Condiciones de participación en el BOmm
+            <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto los Términos y Condiciones de participación en el BOmm
         </label>
 
         <label for="habeasData">
-            <input type="checkbox" name="habeasData" id="habeasData" > * Manifiesto que en virtud de la Ley 1581 de 2012 “Por la cual se dictan disposiciones generales para la protección de datos personales”, autorizo a la Cámara de Comercio de Bogotá de manera expresa para llevar a cabo el uso y tratamiento de todos los datos personales y/o de la compañía.
+            <input type="checkbox" name="check2" {{$group->check2 == 'on' ?'checked':''}} id="habeasData" > * Manifiesto que en virtud de la Ley 1581 de 2012 “Por la cual se dictan disposiciones generales para la protección de datos personales”, autorizo a la Cámara de Comercio de Bogotá de manera expresa para llevar a cabo el uso y tratamiento de todos los datos personales y/o de la compañía.
         </label>
+        <div class="offset-10 col-1 ">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button">
+        </div>
     </form>
 @endsection
 @section('scripts')
-    <script src="{{asset('js/pdfobject.min.js')}}"></script>
     <script src="{{asset('js/images.js')}}"></script>
+    <script src="{{asset('js/forms3.js')}}"></script>
 @endsection

@@ -4,6 +4,7 @@ namespace Bomm;
 
 use Bomm\entities\Group;
 use Bomm\entities\Music;
+use Bomm\entities\Representative;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -30,5 +31,10 @@ class User extends Authenticatable
     }
     public function group(){
         return $this->hasOne(Group::class);
+    }
+
+    public function representative()
+    {
+        return $this->hasOne(Representative::class);
     }
 }

@@ -5,16 +5,6 @@
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
     <div class="row ContentForms">
         <form action="{{route('register')}}" method="POST" class="col-6 cols-12">
-            @if (count($errors) > 0)
-
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-
-            @endif
-
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <h2 class="title">¿Aún no tienes una cuenta?</h2>
             <div class="ContentForms-p">
@@ -30,18 +20,27 @@
                     datos:</p>
             </div>
             <div class="Form-inputs">
+
+                @if (count($errors) > 0)
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                @endif
                 <label for="name" class="row middle">
                     <span class="col-5 cols-12">* Nombre del grupo o artista:</span>
-                    <input class="col-6" type="text" id="name" name="name">
+                    <input class="col-6" type="text" id="name" name="name" value="{{old('name')}}">
 
                 </label>
                 <label for="email" class="row middle">
                     <span class="col-5 cols-12">* Correo electrónico:</span>
-                    <input class="col-6" type="text" id="email" name="email">
+                    <input class="col-6" type="text" id="email" name="email" value="{{old('email')}}">
                 </label>
                 <label for="email_confirmation" class="row middle">
                     <span class="col-5 cols-12">* Repetir correo electrónico:</span>
-                    <input class="col-6" type="text" id="email_confirmation" name="email_confirmation">
+                    <input class="col-6" type="text" id="email_confirmation" name="email_confirmation" value="{{old('email_confirmation')}}">
                 </label>
 
                 <label for="password" class="row middle">

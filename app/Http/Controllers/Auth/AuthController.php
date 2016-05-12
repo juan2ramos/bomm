@@ -2,8 +2,10 @@
 
 namespace Bomm\Http\Controllers\Auth;
 
+use Bomm\entities\Call;
 use Bomm\entities\Group;
 use Bomm\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Validator;
@@ -47,41 +49,63 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users|confirmed',
             'password' => 'required|min:6|confirmed',
+        ],[
+            'name.required' => 'El campo nombre es obligatorio',
+            'email.required' => 'El campo Email es obligatorio',
+            'email.email' => 'Tiene que se un email valido',
+            'email.unique' => 'Ya se encuentra registrado',
+            'email.confirmed' => 'los email deben ser iguales',
+            'password.required' => 'El campo Contraseña es obligatorio',
+            'password.min' => 'El password debe tener mínimo 6 carateres',
+            'password.confirmed' => 'las contraseñas deben de ser iguales',
         ]);
     }
+
     public function loginPath()
     {
         return route('/');
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'nombre' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $group = Group::create(['name' => $data['name'], 'user_id' => $user->id]);
+        Call::create(
+            [
+                'inscripcion_inicial' => '2016',
+                'convocatoria' => '2016',
+                'fecha_registro' => new Carbon(),
+                'id_grupos_musica' => $group->id
+            ]);
+        return $user;
     }
+
     public function getLogout()
     {
         Auth::Logout();
         Session::flush();
         return redirect('/');
     }
+
     /**
      * Get the post register / login redirect path.
      *
@@ -89,17 +113,29 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-
         if (!is_null($group = Auth::user()->musics()->first())) {
             Session::put('idGroup', $group->id);
             Session::put('antique', 1);
             return route('dashboard');
         }
-        if (!is_null($group =  Auth::user()->group()->first())) {
+        if (!is_null($group = Auth::user()->group()->first())) {
             Session::put('idGroup', $group->id);
             Session::put('antique', 0);
             return route('dashboard');
         }
+
+        /*
+         * esto solo sucede una sola ves con usuarios antiguos que no tienen grupo
+         *
+         * */
+        $group  = Group::create(['name' => Auth::user()->nombre, 'user_id' => Auth::user()->id]);
+        Call::create(
+            [
+                'inscripcion_inicial' => '2000',
+                'convocatoria' => '2016',
+                'fecha_registro' => new Carbon(),
+                'id_grupos_musica' => $group->id
+            ]);
         return route('dashboard');
     }
 

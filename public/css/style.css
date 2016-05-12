@@ -445,7 +445,7 @@ hr {
     margin: 0.5rem 0 0.5rem;
     height: 6.25rem;
     padding: 0.5rem; }
-  .Form-inputs input, .Form-inputs select {
+  .Form-inputs input[type="text"], .Form-inputs input[type="email"], .Form-inputs input[type="password"], .Form-inputs select {
     border: 0.0625rem solid #999;
     background-color: #fff;
     padding: 0.25rem;
@@ -550,7 +550,8 @@ hr {
     display: block;
     width: 0;
     background: #be0f34;
-    height: 100%; }
+    height: 100%;
+    transition: all 0.5s; }
 
 .Progress-val {
   margin-left: 0.25rem; }
@@ -581,7 +582,8 @@ hr {
   overflow: hidden;
   position: absolute;
   top: 1px;
-  z-index: -1; }
+  z-index: -1;
+  max-width: 15.75rem; }
 
 .steps label {
   position: relative; }
@@ -615,5 +617,13 @@ hr {
 
 #social input[type='text'], #social em {
   display: none; }
+
+.facebook-p {
+  font-size: 11px;
+  text-align: justify; }
+  .facebook-p a {
+    color: #be0f34; }
+    .facebook-p a:hover {
+      text-decoration: underline; }
 
 /*# sourceMappingURL=style.css.map */

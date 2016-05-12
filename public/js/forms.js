@@ -4,6 +4,7 @@ var $labels = $('.required'),
     $social = $('#social input[type=checkbox]'),
     $socialInput = $('#social input[type=text]'),
     $inputs = $labels.filter(function () {
+        console.log(this.value);
         return this.value;
     });
 
@@ -13,9 +14,23 @@ $(function () {
             $(this).show();
             $(this).siblings("em").show();
             $(this).siblings("span").find('input').prop('checked', true);
+            $(this).siblings(".facebook-p").show( "slow" );
         }
     });
+    if($('#Proposal input').val() != '6'){
+        $('#otherProposal').show();
+    }
+    disabledCheck();
     progressBar();
+});
+$('#photoGroup').on('change',function(){
+    $('#imageHidden').val($(this).val());
+    $( "#imageHidden" ).trigger( "change" );
+});
+$('#pdfArtist').on('change',function(){
+    $( "#pdfNameInput" ).val( "temp" );
+    $( "#pdfNameInput" ).trigger( "change" );
+
 });
 $labels.on('change', function () {
     $inputs = $labels.filter(function () {
@@ -23,26 +38,75 @@ $labels.on('change', function () {
     });
     progressBar();
 });
-$social.on('click', function () {
-    if ($(this).is(':checked')) {
-        $(this).parent().siblings("input").show();
-        $(this).parent().siblings("em").show()
-    } else {
-        $(this).parent().siblings("input").hide()
-        $(this).parent().siblings("em").hide()
-    }
+$socialInput.on('change', function () {
     progressBar();
 });
-function progressBar() {
-    socialCount = ($('#social input:checked').length > 1) ? 1 : 0;
+$social.on('click', function () {
+    if ($(this).is(':checked')) {
+        $(this).parent().siblings("input").show( "slow" );
+        $(this).parent().siblings("em").show( "slow" );
+        $(this).parent().siblings(".facebook-p").show( "slow" );
 
-    widthBar = Math.round(($inputs.size() + socialCount) / ($labels.size() + 1) * 100);
+    } else {
+        $(this).parent().siblings("input").hide( "slow" ).val('')
+        $(this).parent().siblings("em").hide( "slow" );
+        $(this).parent().siblings(".facebook-p").hide( "slow" );
+    }
+    disabledCheck();
+    progressBar();
+});
+function disabledCheck(){
+    var k = 0;
+    $('#social input:checked').each(function () {
+        k++;
+    });
+    if (k > 1) {
+        $("#social input:checkbox:not(:checked)").attr('disabled','disabled');
+
+    } else {
+        $("#social input:checkbox:not(:checked)").removeAttr('disabled','disabled');
+    }
+}
+function progressBar() {
+    if($('#proposal select').val() == '6'){
+        $('#otherProposal').show( "slow" );
+    }else{
+        $('#otherProposal').hide( "slow" );
+        $('#otherProposal input').val('');
+    }
+    var k = 0;
+    $('#social input:checked').each(function () {
+
+        if ($(this).parent().siblings("input").val()) {
+            k++;
+        }
+    });
+    console.log(k);
+    socialCount = (k > 1) ? 1 : 0;
+
+
+
+    if($('#short_review_en').length > 0){
+        widthBar = Math.round(($inputs.size() + socialCount) / ($labels.size() + 1) * 100);
+    }else{
+        console.log($labels.size());
+        widthBar = Math.round(($inputs.size()) / ($labels.size() ) * 100);
+    }
+
     $bar.css('width', widthBar + '%');
     $barVal.text(widthBar + '%');
 }
-
-$('textarea').inputlimiter({
-    limit: 700,
-    remText: '%n caractere%s restantes.',
-    limitText: ''
-});
+if($('#short_review').length > 0){
+    $('#short_review').inputlimiter({
+        limit: 700,
+        remText: '%n caractere%s restantes.',
+        limitText: ''
+    });
+}
+if($('#short_review_en').length > 0){
+    $('#short_review_en').inputlimiter({
+        limit: 300,
+        remText: '%n caractere%s restantes.',
+        limitText: ''
+    });
+}
