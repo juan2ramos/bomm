@@ -161,7 +161,10 @@ class GroupController extends Controller
         $r = Auth::user()->representative()->first();
         if (!$r && Session::get('antique')) {
             $r = Auth::user()->group()->select('id')->first()->related()->first()->normalizeData();
+        }else{
+            $r = new Representative();
         }
+
         return view('step2', compact('countries', 'step', 'r'));
     }
 
