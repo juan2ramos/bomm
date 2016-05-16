@@ -159,12 +159,12 @@ class GroupController extends Controller
         $step = 2;
 
         $r = Auth::user()->representative()->first();
-        if (!$r && Session::get('antique')) {
-            $r = Auth::user()->group()->select('id')->first()->related()->first()->normalizeData();
-        }else{
-            $r = new Representative();
-        }
 
+        if (!$r) {
+            $r = (Session::get('antique'))?
+                Auth::user()->group()->select('id')->first()->related()->first()->normalizeData():
+                new Representative();
+        }
         return view('step2', compact('countries', 'step', 'r'));
     }
 
@@ -178,6 +178,7 @@ class GroupController extends Controller
             $data['image_representative'] = $imageName;
         }
         $next = $data['submit'];
+
         unset($data['submit'], $data['imageRepresentative']);
 
         $representative = Representative::firstOrNew(['user_id' => Auth::user()->id]);
