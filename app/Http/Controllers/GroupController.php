@@ -159,7 +159,7 @@ class GroupController extends Controller
         $step = 2;
 
         $r = Auth::user()->representative()->first();
-        if (!$r) {
+        if (!$r && Session::get('antique')) {
             $r = Auth::user()->group()->select('id')->first()->related()->first()->normalizeData();
         }
         return view('step2', compact('countries', 'step', 'r'));
