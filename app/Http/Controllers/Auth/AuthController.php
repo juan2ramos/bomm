@@ -2,8 +2,8 @@
 
 namespace Bomm\Http\Controllers\Auth;
 
-use Bomm\entities\Call;
-use Bomm\entities\Group;
+use Bomm\Entities\Call;
+use Bomm\Entities\Group;
 use Bomm\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

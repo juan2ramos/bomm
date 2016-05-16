@@ -2,12 +2,12 @@
 
 namespace Bomm\Http\Controllers;
 
-use Bomm\entities\Call;
+use Bomm\Entities\Call;
 use Bomm\Entities\Country;
-use Bomm\entities\Group;
-use Bomm\entities\Music;
-use Bomm\entities\Related;
-use Bomm\entities\Representative;
+use Bomm\Entities\Group;
+use Bomm\Entities\Music;
+use Bomm\Entities\Related;
+use Bomm\Entities\Representative;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

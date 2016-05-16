@@ -2,9 +2,9 @@
 
 namespace Bomm;
 
-use Bomm\entities\Group;
-use Bomm\entities\Music;
-use Bomm\entities\Representative;
+use Bomm\Entities\Group;
+use Bomm\Entities\Music;
+use Bomm\Entities\Representative;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

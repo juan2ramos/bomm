@@ -1,6 +1,6 @@
 <?php
 
-namespace Bomm\entities;
+namespace Bomm\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,8 +2,8 @@
 
 namespace Bomm\Http\Middleware;
 
-use Bomm\entities\Call;
-use Bomm\entities\Group;
+use Bomm\Entities\Call;
+use Bomm\Entities\Group;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
