@@ -13,9 +13,11 @@ $(function () {
             $(this).show();
             $(this).siblings("em").show();
             $(this).siblings("span").find('input').prop('checked', true);
-            $(this).siblings(".facebook-p").show( "slow" );
         }
     });
+    if(!$('#facebook').val()){
+        $('#facebook').siblings(".facebook-p").hide( "slow" );;
+    }
     if($('#Proposal input').val() != '6'){
         $('#otherProposal').show();
     }
@@ -37,6 +39,16 @@ $labels.on('change', function () {
         return this.value;
     });
     progressBar();
+});
+$labels.on('change', function () {
+    $('.Form-errors').hide();
+    $inputs = $labels.filter(function () {
+        return this.value;
+    });
+    progressBar();
+});
+$('input, textarea, select').on('change', function () {
+    $('.Form-errors').hide();
 });
 $socialInput.on('change', function () {
     progressBar();

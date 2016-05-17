@@ -130,6 +130,11 @@ class GroupController extends Controller
             'pdf' => 'required',
             'showcases' => 'required',
 
+            'facebook' => 'required_without:twitter,instagram',
+            'twitter' => 'required_without:facebook,instagram',
+            'instagram' => 'required_without:facebook,twitter',
+
+            /*  required_without*/
         ],[
             'name.required'=> 'El campo nombre es requerido',
             'short_review.required'=> 'El campo reseña es requerido',

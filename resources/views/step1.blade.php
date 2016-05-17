@@ -140,11 +140,13 @@
                 Envíanos las dos redes sociales que más usas. Ten en cuenta que los curadores asignan el puntaje de
                 acuerdo con el número de seguidores que tienes en cada red.
             </p>
-            <div id="social">
+            <div id="social" class="Social">
+                @if(!empty($errors->get('facebook')[0]) || !empty($errors->get('twitter')[0]) || !empty($errors->get('instagram')[0]))
+                    <p class="Form-errors">Debes escoger 2 de las 3 redes sociales</p>
+                @endif
                 <label for="facebook" class="row middle ">
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Facebook:</span>
                     <input class="col-6" type="text" id="facebook" name="facebook" value="{{$group->facebook}}">
-                    <em>?<span>Recuerda que la dirección de tu facebook debe estar de esta forma https://www.facebook.com/XXXXX</span></em>
                     <p class="col-6 offset-5 facebook-p">
                         Para el envío de un enlace de Facebook, por favor incluir un texto que advierte “Ten
 
@@ -160,6 +162,8 @@
 
                         <a href="https://www.facebook.com/help/116067818477568" target="_blank">https://www.facebook.com/help/116067818477568</a>
                     </p>
+                    <em>?<span>Recuerda que la dirección de tu facebook debe estar de esta forma https://www.facebook.com/XXXXX</span></em>
+
                 </label>
                 <label for="twitter" class="row middle">
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Twitter</span>

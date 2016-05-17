@@ -71,6 +71,7 @@
                        value="{{$r->last_name_representative}}">
             </label>
             <label for="identificationRepresentative" class="row middle">
+
                 <span class="col-5  cols-12">* Tipo de documento de identificación: </span>
 
                 <select id="identificationRepresentative" class=" required col-6 cols-12"
