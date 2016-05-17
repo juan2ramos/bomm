@@ -5,6 +5,7 @@ var $bar = $('.Progress-bar span'),
 
 $(function () {
     progressBar();
+
 });
 
 $('input , select').on('change', function () {
@@ -22,3 +23,8 @@ function progressBar() {
     $bar.css('width', widthBar + '%');
     $barVal.text(widthBar + '%');
 }
+
+$('input, textarea, select').on('change', function () {
+    $('.Form-errors').hide();
+
+});

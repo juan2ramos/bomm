@@ -114,6 +114,9 @@ class GroupController extends Controller
         unset($data['submit'], $data['photoGroup'], $data['pdfArtist']);
         $group->fill($data);
         Auth::user()->group()->save($group);
+
+        $this->callReturn(0);
+
         if ($next == 'CONTINUAR')
             return $this->continueStepToTwo($data);
         return 'back';
@@ -125,10 +128,13 @@ class GroupController extends Controller
             'name' => 'required',
 
             'short_review' => 'required|max:700',
+            'short_review_en' => 'required|max:700',
             'type_proposal' => 'required',
             'genre' => 'required',
             'pdf' => 'required',
             'showcases' => 'required',
+            'image' => 'required',
+            'manager' => 'required',
 
             'facebook' => 'required_without:twitter,instagram',
             'twitter' => 'required_without:facebook,instagram',
@@ -138,9 +144,12 @@ class GroupController extends Controller
         ],[
             'name.required'=> 'El campo nombre es requerido',
             'short_review.required'=> 'El campo reseña es requerido',
+            'short_review_en.required'=> 'El campo reseña ingles es requerido',
             'type_proposal.required'=> 'El campo tipo de propuesta es requerido',
             'genre.required'=> 'El campo genero es requerido',
             'pdf.required'=> 'El campo pdf es requerido',
+            'manager.required'=> 'El campo manager es requerido',
+            'image.required' => 'La imagen es requerida',
             'showcases.required'=> 'El campo Indica si quieres que tu propuesta sea evaluada para participar en los showcases es requerido',
 
         ]);
@@ -186,8 +195,7 @@ class GroupController extends Controller
         $representative->fill($data);
         $representative->save();
 
-        $call = Auth::user()->group()->first()->call()->first();
-        $call->step = ($call->step > 1) ?$call->step : 1 ;
+        $this->callReturn(1);
 
         if ($next == 'CONTINUAR')
             return $this->continueStepToThree($data);
@@ -203,6 +211,7 @@ class GroupController extends Controller
             'identification_number_representative' => 'required',
             'gender_representative' => 'required',
             'day_representative' => 'required',
+            'image_representative' => 'required',
             'month_representative' => 'required',
             'year_representative' => 'required',
             'country_representative' => 'required',
@@ -229,6 +238,7 @@ class GroupController extends Controller
             'country_representative.required'=> 'El campo País es requerido',
             'state_representative.required'=> 'El campo Departamento es requerido',
             'city_representative.required'=> 'El campo Ciudad requerido',
+            'image_representative.required'=> 'La imagen es requerida',
             'address_Representative.required'=> 'El campo Dirección es requerido',
             'phone_Representative.required'=> 'El campo Teléfono fijo es requerido',
             'email_representative.required'=> 'El campo Correo electrónico es requerido',
@@ -267,25 +277,39 @@ class GroupController extends Controller
         $group->fill($data);
         $group->save();
 
-        $call = Auth::user()->group()->first()->call()->first();
-        $call->step = ($call->step > 2) ?$call->step : 2 ;
+        $this->callReturn(2);
 
         if ($next == 'CONTINUAR')
-            return $this->continueStepToFour();
+            return $this->continueStepToFour($data);
         return back();
 
         return view('step3', compact('step','group'));
     }
-    private function continueStepToFour()
+    private function continueStepToFour($data)
     {
-        //Por validar y si esta ok actualiza y va al paso 4
-        if (true) {
+
+        $this->validator = Validator::make($data, [
+            'producer' => 'required|max:500',
+            'audio1' => 'required_without_all:audio2,audio3',
+            'audio2' => 'required_without_all:audio1,audio3',
+            'audio3' => 'required_without_all:audio1,audio2',
+            'video1' => 'required_without_all:video2,video3',
+            'video2' => 'required_without_all:video1,video3',
+            'video3' => 'required_without_all:video1,video2',
+
+        ],[
+            'producer.required'=> 'El campo  Productor(es)  es requerido',
+            'producer.max'=> 'no máximo de 500 caracteres',
+
+        ]);
+
+        if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
             $call->step = ($call->step > 3) ?$call->step : 3 ;
             $call->save();
             return redirect()->route('stepFour');
         } else {
-            return back()->withErrors('');
+            return back()->withErrors($this->validator);
         }
     }
 
@@ -304,24 +328,32 @@ class GroupController extends Controller
         $group->fill($data);
         $group->save();
 
-        $call = Auth::user()->group()->first()->call()->first();
-        $call->step = ($call->step > 3) ?$call->step : 3 ;
+        $this->callReturn(3);
         if ($next == 'CONTINUAR')
-            return $this->continueStepToFinish();
+            return $this->continueStepToFinish($data);
         return back();
 
         return view('step4', compact('step','group'));
     }
-    private function continueStepToFinish()
+    private function continueStepToFinish($data)
     {
-        //Por validar y si esta ok actualiza y va al paso final
-        if (true) {
+        $this->validator = Validator::make($data, [
+            'check1' => 'required',
+            'check2' => 'required',
+
+        ],[
+            'check1.required'=> 'Debes haber leído  Términos y Condiciones',
+            'check2.required'=> 'Debes autorizar el tratamiento de datos',
+
+        ]);
+
+        if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
             $call->step = ($call->step > 4) ?$call->step : 4 ;
             $call->save();
             return redirect()->route('stepsFinish');
         } else {
-            return back()->withErrors('');
+            return back()->withErrors($this->validator);
         }
     }
 
@@ -330,6 +362,12 @@ class GroupController extends Controller
     {
         $step = 4;
         return view('stepsFinish',compact('step'));
+    }
+
+    private function callReturn($step){
+        $call = Auth::user()->group()->first()->call()->first();
+        $call->step =  $step ;
+        $call->save();
     }
 
 

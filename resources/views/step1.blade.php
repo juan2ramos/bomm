@@ -23,12 +23,12 @@
     </div>
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
 
-
     <form action="{{route('stepOne')}}" enctype="multipart/form-data" method="post" id="upload_form" class="row steps">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="col-4">
             <label for="photoGroup" class="col-3">
                 <p class="image-p">!Haz clic o arrastra la imagen en jpg o png de tu grupo¡</p>
+                @if(!empty($errors->get('image')[0]))<p class="Form-errors">{{$errors->get('image')[0]}}</p>@endif
                 <input type="file" class="file" name="photoGroup" id="photoGroup">
 
                 <figure class="FigureInputImage row middle center">
@@ -127,13 +127,13 @@
                 <em>?<span>Máximo 12 caracteres</span></em>
             </label>
             <label for="pdfArtist" class="row middle">
+                @if(!empty($errors->get('pdf')[0]))<p class="Form-errors">{{$errors->get('pdf')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Presentación del grupo/artista en un solo archivo PDF:</span>
                 <input data-url="{{route('uploadPdfArtist')}}" class=" col-6" type="file" id="pdfArtist"
                        name="pdfArtist">
                 <em>?<span>Se sugiere que como mínimo debe contener los siguientes componentes: Pitch (un párrafo que reseña la propuesta), el EPK (EPK significa Electronic Press Kit por sus siglas en inglés. Es una herramienta promocional en la que se incluye la biografía de la banda, fotos, información de contacto de la banda, manager, discografía, entre otros), y el Rider Técnico, la relación de los requerimientos mínimos para llevar a cabo una presentación en vivo del grupo/artista (si aplica)</span></em>
+                <input type="hidden" class="required" name="pdf" id="pdfNameInput" value="{{$group->pdf}}">
             </label>
-
-            <input type="hidden" class="required" name="pdf" id="pdfNameInput" value="{{$group->pdf}}">
             <div id="pdf" class="col-11"></div>
             <label for="website" class="row middle">
                 <span class="col-5 cols-12">Sitio web:</span>

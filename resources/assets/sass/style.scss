@@ -325,7 +325,7 @@ hr {
   color: white;
   background: $red;
   border-radius: 4px;
-  right: 208px;
+  right: rem(55);
   bottom: 100%;
   margin: 0;
   &:before{
@@ -342,4 +342,7 @@ hr {
 }
 .Social{
   position: relative;
+}
+.opacity{
+  opacity: .5;
 }

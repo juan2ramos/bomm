@@ -8,6 +8,7 @@ var $labels = $('.required'),
     });
 
 $(function () {
+    company();
     $socialInput.each(function (i) {
         if ($(this).val()) {
             $(this).show();
@@ -120,4 +121,16 @@ if($('#short_review_en').length > 0){
         remText: '%n caractere%s restantes.',
         limitText: ''
     });
+}
+$('#isCompany').on('change',company);
+
+function company(){
+    if($('#isCompany').val() != 1){
+        $('.Company').prop('disabled',true);
+        $('.Company').addClass('opacity');
+        $('.Company').val('');
+    }else{
+        $('.Company').prop('disabled',false);
+        $('.Company').removeClass('opacity');
+    }
 }

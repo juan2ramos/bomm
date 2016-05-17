@@ -634,7 +634,7 @@ hr {
   color: white;
   background: #be0f34;
   border-radius: 4px;
-  right: 208px;
+  right: 3.4375rem;
   bottom: 100%;
   margin: 0; }
   .Form-errors:before {
@@ -650,5 +650,8 @@ hr {
 
 .Social {
   position: relative; }
+
+.opacity {
+  opacity: .5; }
 
 /*# sourceMappingURL=style.css.map */

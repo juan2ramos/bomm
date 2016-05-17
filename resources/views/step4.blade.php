@@ -35,10 +35,12 @@
             </select>
         </p>
         <label for="terms">
+            @if(!empty($errors->get('check1')[0]))<p class="Form-errors">{{$errors->get('check1')[0]}}</p>@endif
             <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto los Términos y Condiciones de participación en el BOmm
         </label>
 
         <label for="habeasData">
+            @if(!empty($errors->get('check2')[0]))<p class="Form-errors">{{$errors->get('check2')[0]}}</p>@endif
             <input type="checkbox" name="check2" {{$group->check2 == 'on' ?'checked':''}} id="habeasData" > * Manifiesto que en virtud de la Ley 1581 de 2012 “Por la cual se dictan disposiciones generales para la protección de datos personales”, autorizo a la Cámara de Comercio de Bogotá de manera expresa para llevar a cabo el uso y tratamiento de todos los datos personales y/o de la compañía.
         </label>
 

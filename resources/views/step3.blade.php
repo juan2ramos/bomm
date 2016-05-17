@@ -27,12 +27,18 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
         <label for="producer" class="  row middle col-12">
+            @if(!empty($errors->get('producer')[0]))<p class="Form-errors">{{$errors->get('producer')[0]}}</p>@endif
             <span class="col-12 cols-12">* Productor(es) <br>(500 caracteres):</span>
             <textarea class="col-12 cols-12 required" id="producer" name="producer">{{$group->producer}}</textarea>
         </label>
         <div class="Record row ">
-            <div class="col-6" id="Audios"><h3 class="title">* Audios online [SoundCloud - Reverbnation]
+
+            <div class="col-6" style="position: relative" id="Audios"><h3 class="title">* Audios online [SoundCloud - Reverbnation]
                     <a href="http://ruedadenegocios.bogotamusicmarket.com/pdf/manualAudioBOmm.pdf" target="_blank">Ver manual</a></h3>
+
+                @if(!empty($errors->get('audio1')[0]) || !empty($errors->get('audio2')[0]) || !empty($errors->get('audio3')[0]))
+                    <p class="Form-errors">Debes tener por lo menos un audio</p>
+                @endif
                 <label for="audio1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
                     <textarea class="col-12 cols-12" id="audio1" name="audio1">{{$group->audio1}}</textarea>
@@ -46,8 +52,11 @@
                     <textarea class="col-12 cols-12" id="audio3" name="audio3">{{$group->audio3}}</textarea>
                 </label>
             </div>
-            <div class="col-6" id="Videos"><h3 class="title">* Video [Youtube - Vimeo]
+            <div class="col-6" id="Videos" style="position: relative"><h3 class="title">* Video [Youtube - Vimeo]
                     <a href="http://ruedadenegocios.bogotamusicmarket.com/pdf/manualVideoBOmm.pdf" target="_blank">Ver manual</a></h3>
+                @if(!empty($errors->get('video1')[0]) || !empty($errors->get('video2')[0]) || !empty($errors->get('video3')[0]))
+                    <p class="Form-errors">Debes tener por lo menos un Video</p>
+                @endif
                 <label for="video1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
                     <textarea class="col-12 cols-12" id="video1" name="video1">{{$group->video1}}</textarea>
