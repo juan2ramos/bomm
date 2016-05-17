@@ -243,7 +243,7 @@
                 <select id="isCompany" class="required col-6 cols-12" name="is_company" title="Selecciona la respuesta">
                     <option value="">Selecciona...</option>
                     <option {{($r->is_company == 1) ? 'selected' : ''}} value="1">Sí</option>
-                    <option {{($r->is_company == 1) ? 'selected' : ''}} value="2">No</option>
+                    <option {{($r->is_company == 2) ? 'selected' : ''}} value="2">No</option>
                     </select>
             </label>
             <label for="companyRepresentative" class="row middle">
@@ -266,9 +266,10 @@
                 </select>
             </label>
         </div>
-        <div class="offset-9 col-3 ">
-            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button">
-            <input type="submit" value="CONTINUAR" name="submit" class="Button">
+        <div class="row col-12">
+            <a href="{{route('dashboard')}}" class="Button">Regresar</a>
+            <input type="submit"  value="GUARDAR DATOS" name="submit" class="Button offset-7">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button offset-1">
         </div>
     </form>
 @endsection

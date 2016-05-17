@@ -444,10 +444,12 @@ hr {
   .Form-inputs textarea {
     margin: 0.5rem 0 0.5rem;
     height: 6.25rem;
-    padding: 0.5rem; }
+    padding: 0.5rem;
+    border: 0.125rem solid #b9b9b9;
+    background-color: #F1F1F0; }
   .Form-inputs input[type="text"], .Form-inputs input[type="email"], .Form-inputs input[type="password"], .Form-inputs select {
-    border: 0.0625rem solid #999;
-    background-color: #fff;
+    border: 0.125rem solid #b9b9b9;
+    background-color: #F1F1F0;
     padding: 0.25rem;
     max-width: 27.5rem;
     width: 13.5rem; }
@@ -625,5 +627,25 @@ hr {
     color: #be0f34; }
     .facebook-p a:hover {
       text-decoration: underline; }
+
+.Form-errors {
+  position: absolute;
+  padding: 5px;
+  color: white;
+  background: #be0f34;
+  border-radius: 4px;
+  right: 208px;
+  bottom: 100%;
+  margin: 0; }
+  .Form-errors:before {
+    position: absolute;
+    top: 100%;
+    right: 0.5rem;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid #be0f34; }
 
 /*# sourceMappingURL=style.css.map */

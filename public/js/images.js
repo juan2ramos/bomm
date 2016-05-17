@@ -99,7 +99,11 @@ $("#pdfArtist").on("change", function (event) {
     var form_url = $(this).data("url");
     var CSRF_TOKEN = $('input[name="_token"]').val();
     var fd = new FormData();
-    console.log(this.files)
+    if(this.files[0].type != 'application/pdf'){
+        $(this).val('')
+        alert('EL archivo debe ser un pdf');
+        return
+    }
     fd.append("pdf", this.files[0]);
     fd.append("_token", CSRF_TOKEN);
     jQuery.ajax({

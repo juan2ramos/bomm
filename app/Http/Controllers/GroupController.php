@@ -128,8 +128,6 @@ class GroupController extends Controller
             'type_proposal' => 'required',
             'genre' => 'required',
             'pdf' => 'required',
-            'manager' => 'required',
-            'show_cost' => 'required',
             'showcases' => 'required',
 
         ],[
@@ -138,8 +136,6 @@ class GroupController extends Controller
             'type_proposal.required'=> 'El campo tipo de propuesta es requerido',
             'genre.required'=> 'El campo genero es requerido',
             'pdf.required'=> 'El campo pdf es requerido',
-            'manager.required'=> 'El campo Manager o representante es requerido',
-            'show_cost.required'=> 'El campo ¿Cuánto cuesta tu show en vivo? es requerido',
             'showcases.required'=> 'El campo Indica si quieres que tu propuesta sea evaluada para participar en los showcases es requerido',
 
         ]);
@@ -184,6 +180,9 @@ class GroupController extends Controller
         $representative = Representative::firstOrNew(['user_id' => Auth::user()->id]);
         $representative->fill($data);
         $representative->save();
+
+        $call = Auth::user()->group()->first()->call()->first();
+        $call->step = ($call->step > 1) ?$call->step : 1 ;
 
         if ($next == 'CONTINUAR')
             return $this->continueStepToThree($data);
@@ -262,6 +261,10 @@ class GroupController extends Controller
         unset($data['submit']);
         $group->fill($data);
         $group->save();
+
+        $call = Auth::user()->group()->first()->call()->first();
+        $call->step = ($call->step > 2) ?$call->step : 2 ;
+
         if ($next == 'CONTINUAR')
             return $this->continueStepToFour();
         return back();
@@ -295,6 +298,9 @@ class GroupController extends Controller
         unset($data['submit']);
         $group->fill($data);
         $group->save();
+
+        $call = Auth::user()->group()->first()->call()->first();
+        $call->step = ($call->step > 3) ?$call->step : 3 ;
         if ($next == 'CONTINUAR')
             return $this->continueStepToFinish();
         return back();

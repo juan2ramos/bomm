@@ -25,9 +25,10 @@
 
         <p>Haz clic en "Confirmar inscripción" para enviar tu solicitud. Al hacerlo, entiendes que NO podrás editar, borrar ni adjuntar más información a tu cuenta y que el jurado recibirá tu inscripción tal y como la has elaborado hasta este punto. Recibirás un correo electrónico notificando tu inscripción definitiva al BOmm "Bogotá Music Market".
 
-        <div class="offset-8 col-4 ">
-            <input type="submit" value="Confirmar inscripción" name="submit" class="Button">
-            <a href="{{url('logout')}}" class="Button">Continuar más tarde</a>
+        <div class="col-12 row ">
+            <a href="{{route('stepFour')}}" class="Button">Regresar</a>
+            <input type="submit" value="Confirmar inscripción" name="submit" class="Button offset-6">
+            <a href="{{url('logout')}}" class="Button offset-1">Continuar más tarde</a>
         </div>
     </form>
 @endsection

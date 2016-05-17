@@ -64,9 +64,10 @@
             </div>
 
         </div>
-        <div class="offset-9 col-3 ">
-            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button">
-            <input type="submit" value="CONTINUAR" name="submit" class="Button">
+        <div class="row col-12">
+            <a href="{{route('stepTwo')}}" class="Button">Regresar</a>
+            <input type="submit"  value="GUARDAR DATOS" name="submit" class="Button offset-7">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button offset-1">
         </div>
     </form>
 @endsection

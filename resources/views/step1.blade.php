@@ -22,14 +22,8 @@
         <span class="Progress-val"></span>
     </div>
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
-    @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
 
-    @endif
+
     <form action="{{route('stepOne')}}" enctype="multipart/form-data" method="post" id="upload_form" class="row steps">
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="col-4">
@@ -57,6 +51,7 @@
         </div>
         <div class="col-8 Form-inputs">
             <label for="name" class="row middle">
+                @if(!empty($errors->get('name')[0]))<p class="Form-errors">{{$errors->get('name')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Nombre del artista o grupo:</span>
                 <input class="col-6 required" type="text" id="name" name="name" value="{{$group->name}}">
             </label>
@@ -90,6 +85,7 @@
                        value="{{$group->other_proposal}}">
             </label>
             <label for="genre" class="row middle">
+                @if(!empty($errors->get('genre')[0]))<p class="Form-errors">{{$errors->get('genre')[0]}}</p>@endif
                 <span class="col-5  cols-12">* Género:</span>
                 <select id="genre" name="genre" class="required col-6" title="Selecciona el tipo de género">
                     <option value="">Selecciona...</option>
@@ -138,7 +134,7 @@
             <div id="pdf" class="col-11"></div>
             <label for="website" class="row middle">
                 <span class="col-5 cols-12">Sitio web:</span>
-                <input class="col-6 required" type="text" id="website" name="website" value="{{$group->website}}">
+                <input class="col-6 " type="text" id="website" name="website" value="{{$group->website}}">
             </label>
             <p class="col-11">
                 Envíanos las dos redes sociales que más usas. Ten en cuenta que los curadores asignan el puntaje de
@@ -183,7 +179,7 @@
             </label>
             <label for="show_cost" class="row middle">
                 <span class="col-5 cols-12">¿Cuánto cuesta tu show en vivo? (sin contemplar gastos de traslado a otra ciudad)</span>
-                <input class="col-6 required" type="text" id="show_cost" name="show_cost" value="{{$group->show_cost}}">
+                <input class="col-6 " type="text" id="show_cost" name="show_cost" value="{{$group->show_cost}}">
             </label>
             <label for="showcases" class="row middle">
                 <span class="col-5 cols-12">* Indica si quieres que tu propuesta sea evaluada para participar en los showcases:</span>
@@ -196,9 +192,9 @@
                 <em>? <span>No todos los artistas desean presentarse en vivo. Indica si aceptas que tu agrupación sea tenida en cuenta para la selección de los showcases por parte de los curadores</span></em>
             </label>
         </div>
-        <div class="offset-9 col-3 ">
-            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button">
-            <input type="submit" value="CONTINUAR" name="submit" class="Button">
+        <div class="col-12 ">
+            <input type="submit" value="GUARDAR DATOS" name="submit" class="Button offset-8">
+            <input type="submit" value="CONTINUAR" name="submit" class="Button offset-1">
         </div>
     </form>
 @endsection

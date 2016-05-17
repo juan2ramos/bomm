@@ -16,9 +16,8 @@ function progressBar() {
     $('input:checked').each(function () {
         k++;
     });
-    required = ($required.val()) ? 1 : 0;
 
-    widthBar = Math.round( (k + required)  / 3 * 100);
+    widthBar = Math.round( k  / 2 * 100);
 
     $bar.css('width', widthBar + '%');
     $barVal.text(widthBar + '%');

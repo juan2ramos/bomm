@@ -4,7 +4,6 @@ var $labels = $('.required'),
     $social = $('#social input[type=checkbox]'),
     $socialInput = $('#social input[type=text]'),
     $inputs = $labels.filter(function () {
-        console.log(this.value);
         return this.value;
     });
 
@@ -33,6 +32,7 @@ $('#pdfArtist').on('change',function(){
 
 });
 $labels.on('change', function () {
+    $('.Form-errors').hide();
     $inputs = $labels.filter(function () {
         return this.value;
     });
@@ -81,7 +81,6 @@ function progressBar() {
             k++;
         }
     });
-    console.log(k);
     socialCount = (k > 1) ? 1 : 0;
 
 

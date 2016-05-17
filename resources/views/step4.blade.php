@@ -28,7 +28,7 @@
 
         <p>¿Actualmente estás recibiendo  servicios empresariales de la Cámara de Comercio para mejorar la viabilidad
             económica de tu proyecto?
-            <select  name="services" class="required" title="Selecciona la respuesta">
+            <select  name="services" class="" title="Selecciona la respuesta">
                 <option value="">Selecciona...</option>
                 <option value="1" {{($group->services == 1) ?'selected':''}}>Sí</option>
                 <option value="2" {{($group->services == 2) ?'selected':''}}>No</option>
@@ -41,8 +41,10 @@
         <label for="habeasData">
             <input type="checkbox" name="check2" {{$group->check2 == 'on' ?'checked':''}} id="habeasData" > * Manifiesto que en virtud de la Ley 1581 de 2012 “Por la cual se dictan disposiciones generales para la protección de datos personales”, autorizo a la Cámara de Comercio de Bogotá de manera expresa para llevar a cabo el uso y tratamiento de todos los datos personales y/o de la compañía.
         </label>
-        <div class="offset-10 col-1 ">
-            <input type="submit" value="CONTINUAR" name="submit" class="Button">
+
+        <div class="row col-12">
+            <a href="{{route('stepThree')}}" class="Button">Regresar</a>
+            <input type="submit" value="CONTINUAR" name="submit" class="Button offset-9">
         </div>
     </form>
 @endsection
