@@ -61,17 +61,23 @@
         </div>
         <div class="col-8 Form-inputs">
             <label for="nameRepresentative" class="row middle">
+                @if(!empty($errors->get('name_representative')[0]))<p class="Form-errors">{{$errors->get('name_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Nombre(s) de la persona que va en representación:</span>
                 <input class="col-6 required" type="text" id="nameRepresentative" name="name_representative"
                        value="{{$r->name_representative}}">
             </label>
             <label for="lastNameRepresentative" class="row middle">
+                @if(!empty($errors->get('last_name_representative')[0]))<p class="Form-errors">{{$errors->get('last_name_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Apellido(s):</span>
                 <input class="col-6 required" type="text" id="lastNameRepresentative" name="last_name_representative"
                        value="{{$r->last_name_representative}}">
             </label>
             <label for="identificationRepresentative" class="row middle">
+<<<<<<< HEAD
 
+=======
+                @if(!empty($errors->get('identification_representative')[0]))<p class="Form-errors">{{$errors->get('identification_representative')[0]}}</p>@endif
+>>>>>>> 93399367c1bd34dd6e4c93b54da38d8bec430e0c
                 <span class="col-5  cols-12">* Tipo de documento de identificación: </span>
 
                 <select id="identificationRepresentative" class=" required col-6 cols-12"
@@ -87,12 +93,14 @@
                 </select>
             </label>
             <label for="identificationNumberRepresentative" class="row middle">
+                @if(!empty($errors->get('identification_number_representative')[0]))<p class="Form-errors">{{$errors->get('identification_number_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Número de identificación:</span>
                 <input class="col-6 required" type="text" id="identificationNumberRepresentative"
                        value="{{$r->identification_number_representative}}"
                        name="identification_number_representative">
             </label>
             <label for="genderRepresentative" class="row middle">
+                @if(!empty($errors->get('gender_representative')[0]))<p class="Form-errors">{{$errors->get('gender_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12 ">* Género </span>
                 <select id="genderRepresentative" name=" gender_representative" class="required col-6 cols-12"
                         title="Selecciona el género">
@@ -102,6 +110,7 @@
                 </select>
             </label>
             <label for="dayRepresentative" class="row middle">
+                @if(!empty($errors->get('day_representative')[0]))<p class="Form-errors">{{$errors->get('day_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Fecha de nacimiento: </span>
                 <select id="dayRepresentative" name="day_representative" class="required col-2 cols-12"
                         title="Selecciona el día">
@@ -126,6 +135,7 @@
                 </select>
             </label>
             <label for="countryRepresentative" class="row middle">
+                @if(!empty($errors->get('country_representative')[0]))<p class="Form-errors">{{$errors->get('country_representative')[0]}}</p>@endif
                 <span class="col-5  cols-12">* País: </span>
                 <select id="countryRepresentative" class="required col-6 cols-12" name="country_representative"
                         title="Selecciona el país">
@@ -136,27 +146,32 @@
                 </select>
             </label>
             <label for="stateRepresentative" class="row middle">
+                @if(!empty($errors->get('state_representative')[0]))<p class="Form-errors">{{$errors->get('state_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Departamento:</span>
                 <input class="required col-6" type="text" id="stateRepresentative" name="state_representative"
                        value="{{$r->state_representative}}">
             </label>
             <label for="cityRepresentative" class="row middle">
+                @if(!empty($errors->get('city_representative')[0]))<p class="Form-errors">{{$errors->get('city_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Ciudad:</span>
                 <input class="col-6 required" type="text" id="cityRepresentative" name="city_representative"
                        value="{{$r->city_representative}}">
             </label>
             <label for="addressRepresentative" class="row middle">
+                @if(!empty($errors->get('address_Representative')[0]))<p class="Form-errors">{{$errors->get('address_Representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Dirección:</span>
                 <input class="col-6 required" type="text" id="addressRepresentative" name="address_Representative"
                        value="{{$r->address_Representative}}">
             </label>
             <label for="phoneRepresentative" class="row middle">
+                @if(!empty($errors->get('phone_Representative')[0]))<p class="Form-errors">{{$errors->get('phone_Representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Teléfono fijo:</span>
                 <input class="col-6 required" type="text" id="phoneRepresentative" name="phone_Representative"
                        value="{{$r->phone_Representative}}">
                 <em>?<span>Estos datos permitirán que otros participantes en el BOmm te contacten</span></em>
             </label>
             <label for="publicPhone" class="row middle">
+
                 <span class="col-5 cols-12">¿Deseas que publiquemos en nuestro sitio web este dato? [Teléfono]:</span>
                 <select id="publicPhone" class="col-6 cols-12" name="public_phone" title="Selecciona la respuesta">
                     <option value="">Selecciona...</option>
@@ -179,6 +194,7 @@
                 </select>
             </label>
             <label for="emailRepresentative" class="row middle">
+                @if(!empty($errors->get('email_representative')[0]))<p class="Form-errors">{{$errors->get('email_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Correo electrónico:</span>
                 <input class="col-6 required" type="text" id="emailRepresentative" name="email_representative"
                        value="{{$r-> email_representative}}">
@@ -193,6 +209,7 @@
                 </select>
             </label>
             <label for="emailAlternativeRepresentative" class="row middle">
+                @if(!empty($errors->get('email_alternative_representative')[0]))<p class="Form-errors">{{$errors->get('email_alternative_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12 ">* Correo alternativo :</span>
                 <input class="col-6 required" type="text" id="emailAlternativeRepresentative"
                        name="email_alternative_representative" value="{{$r->email_alternative_representative }}">
@@ -208,6 +225,7 @@
 
             </label>
             <label for="smsAuthorize" class="row middle">
+                @if(!empty($errors->get('sms_authorize')[0]))<p class="Form-errors">{{$errors->get('sms_authorize')[0]}}</p>@endif
                 <span class="col-5 cols-12">* ¿Autorizas el envío de mensajes de texto a tu celular?:</span>
                 <select id="smsAuthorize" class="col-6 cols-12 required" name="sms_authorize"
                         title="Selecciona la respuesta">
@@ -217,6 +235,7 @@
                 </select>
             </label>
             <label for="levelEducationRepresentative" class="row middle">
+                @if(!empty($errors->get('level_education_representative')[0]))<p class="Form-errors">{{$errors->get('level_education_representative')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Nivel de estudios:</span>
                 <select id="levelEducationRepresentative" name="level_education_representative"
                         class="required col-6 cols-12"
@@ -240,6 +259,7 @@
                 </select>
             </label>
             <label for="isCompany" class="row middle">
+                @if(!empty($errors->get('is_company')[0]))<p class="Form-errors">{{$errors->get('is_company')[0]}}</p>@endif
                 <span class="col-5 cols-12">* ¿Vienes en representación de una empresa?:</span>
                 <select id="isCompany" class="required col-6 cols-12" name="is_company" title="Selecciona la respuesta">
                     <option value="">Selecciona...</option>
