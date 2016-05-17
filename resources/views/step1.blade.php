@@ -56,16 +56,19 @@
                 <input class="col-6 required" type="text" id="name" name="name" value="{{$group->name}}">
             </label>
             <label for="short_review" class="row middle">
+                @if(!empty($errors->get('short_review')[0]))<p class="Form-errors">{{$errors->get('short_review')[0]}}</p>@endif
                 <span class="col-12 cols-12">* Escribe una breve reseña de la agrupación o artista: (700 caracteres)</span>
                 <textarea class="col-11 cols-12 required" id="short_review"
                           name="short_review">{{$group->short_review}}</textarea>
             </label>
             <label for="short_review_en" class="row middle">
+                @if(!empty($errors->get('short_review_en')[0]))<p class="Form-errors">{{$errors->get('short_review_en')[0]}}</p>@endif
                 <span class="col-12 cols-12">* Escribe una breve reseña en ingles de la agrupación o artista: (700 caracteres)</span>
                 <textarea class="col-11 cols-12 required" id="short_review_en"
                           name="short_review_en">{{$group->short_review_en}}</textarea>
             </label>
             <label for="type_proposal" id="proposal" class="row middle">
+                @if(!empty($errors->get('type_proposal')[0]))<p class="Form-errors">{{$errors->get('type_proposal')[0]}}</p>@endif
                 <span class="col-5  cols-12">* Tipo de propuesta: </span>
 
                 <select id="type_proposal" name="type_proposal" class="col-6 required"
@@ -177,6 +180,7 @@
                 </label>
             </div>
             <label for="manager" class="row middle">
+                @if(!empty($errors->get('manager')[0]))<p class="Form-errors">{{$errors->get('manager')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Manager o representante:</span>
                 <input class="col-6 required" type="text" id="manager" name="manager" value="{{$group->manager}}">
                 <em>? <span>Indica si tienes un manager que representa tu agrupación</span></em>
@@ -186,6 +190,7 @@
                 <input class="col-6 " type="text" id="show_cost" name="show_cost" value="{{$group->show_cost}}">
             </label>
             <label for="showcases" class="row middle">
+                @if(!empty($errors->get('showcases')[0]))<p class="Form-errors">{{$errors->get('showcases')[0]}}</p>@endif
                 <span class="col-5 cols-12">* Indica si quieres que tu propuesta sea evaluada para participar en los showcases:</span>
                 <select id="showcases" class="col-6 required" name="showcases"
                         title="Indica si quieres que tu propuesta sea evaluada para participar en los showcases">
