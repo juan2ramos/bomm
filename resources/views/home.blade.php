@@ -7,12 +7,14 @@
         <form action="{{route('register')}}" method="POST" class="col-6 cols-12">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <h2 class="title">¿Aún no tienes una cuenta?</h2>
-            <div class="ContentForms-p">
+            <div class="ContentForms-p" style="position:relative;">
+                @if(!empty($errors->get('accept')[0]))<p
+                        class="Form-errors">{{$errors->get('accept')[0]}}</p>@endif
                 <p><b>Paso 1:</b> Lee el reglamento y acéptalo para seguir con el paso 2</p>
                 <p style="margin-left: 48px;"><input name="accept" id="accept" type="checkbox"> <label for="accept">
                         He leído y acepto el
-                        <a href="http://www.bogotamusicmarket.com/images/ReglamentoBOmm2015v4.pdf" target="_blank">
-                            reglamento de participación
+                        <a href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf" target="_blank">
+                            Reglamento de Participación
                         </a>
                     </label>
                 </p>
@@ -21,29 +23,29 @@
             </div>
             <div class="Form-inputs">
 
-                @if (count($errors) > 0)
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-
-                @endif
                 <label for="name" class="row middle">
+                    @if(!empty($errors->get('name')[0]))<p
+                            class="Form-errors">{{$errors->get('name')[0]}}</p>@endif
                     <span class="col-5 cols-12">* Nombre del grupo o artista:</span>
                     <input class="col-6" type="text" id="name" name="name" value="{{old('name')}}">
 
                 </label>
                 <label for="email" class="row middle">
+                    @if(!empty($errors->get('email')[0]))<p
+                            class="Form-errors">{{$errors->get('email')[0]}}</p>@endif
                     <span class="col-5 cols-12">* Correo electrónico:</span>
                     <input class="col-6" type="text" id="email" name="email" value="{{old('email')}}">
                 </label>
                 <label for="email_confirmation" class="row middle">
+                    @if(!empty($errors->get('email_confirmation')[0]))<p
+                            class="Form-errors">{{$errors->get('email_confirmation')[0]}}</p>@endif
                     <span class="col-5 cols-12">* Repetir correo electrónico:</span>
                     <input class="col-6" type="text" id="email_confirmation" name="email_confirmation" value="{{old('email_confirmation')}}">
                 </label>
 
                 <label for="password" class="row middle">
+                    @if(!empty($errors->get('password')[0]))<p
+                            class="Form-errors">{{$errors->get('password')[0]}}</p>@endif
                     <span class="col-5 cols-12">* Contraseña:</span>
                     <input class="col-6" type="password" id="password" name="password">
                     <em>?
@@ -53,6 +55,8 @@
                     </em>
                 </label>
                 <label for="password_confirmation" class="row middle">
+                    @if(!empty($errors->get('password_confirmation')[0]))<p
+                            class="Form-errors">{{$errors->get('password_confirmation')[0]}}</p>@endif
                     <span class="col-5 cols-12">* Repetir contraseña:</span>
                     <input class="col-6" type="password" id="password_confirmation" name="password_confirmation">
                     <em>?
@@ -80,7 +84,7 @@
                 </label>
                 <button class="offset-3 Button">Ingresar</button>
             </div>
-            <p>Si has olvidado tus datos, haz clic <a href="">aquí</a> para recordar.</p>
+            <p>Si has olvidado tus datos, haz clic <a href="/password/email">aquí</a> para recordar.</p>
         </form>
         <p class=" offset-5 Info-p" >
             Para cualquier duda puedes contactarnos al siguiente correo electrónico:

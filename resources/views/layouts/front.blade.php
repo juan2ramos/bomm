@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('openGraph')
-    <title>Boom</title>
+    <title>BOom</title>
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @yield('styles')
@@ -38,7 +38,7 @@
         @endif
         <div class="Header-bar row middle end">
             @if(Auth::check())
-                <a class="Logout" href="{{route('logout')}}">Reglamento de participación</a>
+                <a class="Logout" href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf" target="_blank">Reglamento de participación</a>
             @endif
         </div>
     </header>

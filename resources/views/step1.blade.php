@@ -27,7 +27,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="col-4">
             <label for="photoGroup" class="col-3">
-                <p class="image-p">!Haz clic o arrastra la imagen en jpg o png de tu grupo¡</p>
+                <p class="image-p">¡Haz clic o arrastra la imagen en jpg o png de tu grupo!</p>
                 @if(!empty($errors->get('image')[0]))<p class="Form-errors">{{$errors->get('image')[0]}}</p>@endif
                 <input type="file" class="file" name="photoGroup" id="photoGroup">
 
@@ -63,7 +63,7 @@
             </label>
             <label for="short_review_en" class="row middle">
                 @if(!empty($errors->get('short_review_en')[0]))<p class="Form-errors">{{$errors->get('short_review_en')[0]}}</p>@endif
-                <span class="col-12 cols-12">* Escribe una breve reseña en ingles de la agrupación o artista: (700 caracteres)</span>
+                <span class="col-12 cols-12">* Escribe una breve reseña en inglés de la agrupación o artista: (300 caracteres)</span>
                 <textarea class="col-11 cols-12 required" id="short_review_en"
                           name="short_review_en">{{$group->short_review_en}}</textarea>
             </label>
@@ -80,7 +80,6 @@
                     <option value="3" {{$group->type_proposal == 3 ? 'selected' : ''}}>Músico/Instrumentista</option>
                     <option value="6" {{$group->type_proposal == 6 ? 'selected' : ''}}>Otro</option>
                 </select>
-                <em>?<span>Máximo 12 caracteres</span></em>
             </label>
             <label for="other_proposal" id="otherProposal" class="row middle">
                 <span class="col-5 cols-12">Si has respondido "Otro", por favor indica cuál:</span>
@@ -124,7 +123,6 @@
                     <option value="29" {{$group->genre == 29 ? 'selected' : ''}}>Vocal y acapella</option>
                     <option value="30" {{$group->genre == 30 ? 'selected' : ''}}>World music</option>
                 </select>
-                <em>?<span>Máximo 12 caracteres</span></em>
             </label>
             <label for="pdfArtist" class="row middle">
                 @if(!empty($errors->get('pdf')[0]))<p class="Form-errors">{{$errors->get('pdf')[0]}}</p>@endif
@@ -151,9 +149,7 @@
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Facebook:</span>
                     <input class="col-6" type="text" id="facebook" name="facebook" value="{{$group->facebook}}">
                     <p class="col-6 offset-5 facebook-p">
-                        Para el envío de un enlace de Facebook, por favor incluir un texto que advierte “Ten
-
-                        presente que solo se evaluarán las páginas de Facebook (Fanpage) de tu proyecto musical.
+                        Ten presente que solo se evaluarán las páginas de Facebook (Fanpage) de tu proyecto musical.
 
                         Los curadores no asignarán puntaje a un perfil personal de Facebook. 
 

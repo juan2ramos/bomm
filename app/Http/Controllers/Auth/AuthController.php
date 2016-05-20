@@ -58,8 +58,10 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users|confirmed',
             'password' => 'required|min:6|confirmed',
+            'accept' => 'required',
         ],[
             'name.required' => 'El campo nombre es obligatorio',
+            'accept.required' => 'Debes aceptar las condiciones',
             'email.required' => 'El campo Email es obligatorio',
             'email.email' => 'Tiene que se un email valido',
             'email.unique' => 'Ya se encuentra registrado',
@@ -87,6 +89,7 @@ class AuthController extends Controller
             'nombre' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => 3,
         ]);
         $group = Group::create(['name' => $data['name'], 'user_id' => $user->id]);
         Call::create(
@@ -113,30 +116,34 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        if (!is_null($group = Auth::user()->musics()->first())) {
-            Session::put('idGroup', $group->id);
-            Session::put('antique', 1);
-            return route('dashboard');
-        }
-        if (!is_null($group = Auth::user()->group()->first())) {
-            Session::put('idGroup', $group->id);
-            Session::put('antique', 0);
+        if(Auth::user()->role == 3){
+            if (!is_null($group = Auth::user()->musics()->first())) {
+                Session::put('idGroup', $group->id);
+                Session::put('antique', 1);
+                return route('dashboard');
+            }
+            if (!is_null($group = Auth::user()->group()->first())) {
+                Session::put('idGroup', $group->id);
+                Session::put('antique', 0);
+                return route('dashboard');
+
+            }
+
+            /*
+             * esto solo sucede una sola ves con usuarios antiguos que no tienen grupo
+             *
+             * */
+            $group  = Group::create(['name' => Auth::user()->nombre, 'user_id' => Auth::user()->id]);
+            Call::create(
+                [
+                    'inscripcion_inicial' => '2000',
+                    'convocatoria' => '2016',
+                    'fecha_registro' => new Carbon(),
+                    'id_grupos_musica' => $group->id
+                ]);
             return route('dashboard');
         }
 
-        /*
-         * esto solo sucede una sola ves con usuarios antiguos que no tienen grupo
-         *
-         * */
-        $group  = Group::create(['name' => Auth::user()->nombre, 'user_id' => Auth::user()->id]);
-        Call::create(
-            [
-                'inscripcion_inicial' => '2000',
-                'convocatoria' => '2016',
-                'fecha_registro' => new Carbon(),
-                'id_grupos_musica' => $group->id
-            ]);
-        return route('dashboard');
     }
 
     public function postRegister(Request $request)

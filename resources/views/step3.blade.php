@@ -42,14 +42,20 @@
                 <label for="audio1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
                     <textarea class="col-12 cols-12" id="audio1" name="audio1">{{$group->audio1}}</textarea>
+                    @if($group->audio1)<iframe src="{{$group->audio1}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
                 <label for="audio2" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 2:</span>
                     <textarea class="col-12 cols-12" id="audio2" name="audio2">{{$group->audio2}}</textarea>
+                    @if($group->audio2)<iframe src="{{$group->audio2}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
                 <label for="audio3" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 3:</span>
                     <textarea class="col-12 cols-12" id="audio3" name="audio3">{{$group->audio3}}</textarea>
+                    @if($group->audio3)<iframe src="{{$group->audio3}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
             </div>
             <div class="col-6" id="Videos" style="position: relative"><h3 class="title">* Video [Youtube - Vimeo]
@@ -60,18 +66,24 @@
                 <label for="video1" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 1:</span>
                     <textarea class="col-12 cols-12" id="video1" name="video1">{{$group->video1}}</textarea>
+                    @if($group->video1)<iframe src="{{$group->video1}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
                 <label for="video2" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 2:</span>
                     <textarea class="col-12 cols-12" id="video2" name="video2">{{$group->video2}}</textarea>
+                    @if($group->video2)<iframe src="{{$group->video2}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
 
                 <label for="video3" class="row middle col-12">
                     <span class="col-12 cols-12">Enlace o embed 3:</span>
                     <textarea class="col-12 cols-12" id="video3" name="video3">{{$group->video3}}</textarea>
+                    @if($group->video3)<iframe src="{{$group->video3}}" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>@endif
+
                 </label>
             </div>
-
+            <iframe src="" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
         </div>
         <div class="row col-12">
             <a href="{{route('stepTwo')}}" class="Button">Regresar</a>

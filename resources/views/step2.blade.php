@@ -29,7 +29,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <div class="col-4">
             <label for="imageRepresentative" class="col-3">
-                <p class="image-p">!Haz clic o arrastra la imagen en jpg, png o gif de la persona que va en
+                <p class="image-p">¡Haz clic o arrastra la imagen en jpg, png o gif de la persona que va en
                     representación! </p>
                 @if(!empty($errors->get('image_representative')[0]))<p class="Form-errors">{{$errors->get('image_representative')[0]}}</p>@endif
                 <input type="file" class="file " name="imageRepresentative" id="photoGroup">
@@ -174,7 +174,7 @@
                        value="{{$r->phone_Representative}}">
                 <em>?<span>Estos datos permitirán que otros participantes en el BOmm te contacten</span></em>
             </label>
-            <label for="publicPhone" class="row middle">
+           {{-- <label for="publicPhone" class="row middle">
 
                 <span class="col-5 cols-12">¿Deseas que publiquemos en nuestro sitio web este dato? [Teléfono]:</span>
                 <select id="publicPhone" class="col-6 cols-12" name="public_phone" title="Selecciona la respuesta">
@@ -182,13 +182,13 @@
                     <option {{($r->public_phone == 1) ? 'selected' : ''}} value="1">Sí</option>
                     <option {{($r->public_phone == 2) ? 'selected' : ''}}value="2">No</option>
                 </select>
-            </label>
+            </label>--}}
             <label for="mobileRepresentative" class="row middle">
                 <span class="col-5 cols-12 ">Teléfono celular:</span>
                 <input class="col-6" type="text" id="mobileRepresentative" name="mobile_representative"
                        value="{{$r->mobile_representative}}">
             </label>
-            <label for="publicMobileRepresentative" class="row middle">
+           {{-- <label for="publicMobileRepresentative" class="row middle">
                 <span class="col-5 cols-12">¿Deseas  que publiquemos en nuestro sitio web este dato? [Teléfono]:</span>
                 <select id="publicMobileRepresentative" class="col-6 cols-12" name="public_mobile_representative"
                         title="Selecciona la respuesta">
@@ -196,7 +196,7 @@
                     <option {{($r->public_mobile_representative == 1) ? 'selected' : ''}} value="1">Sí</option>
                     <option {{($r->public_mobile_representative == 2) ? 'selected' : ''}} value="2">No</option>
                 </select>
-            </label>
+            </label>--}}
             <label for="emailRepresentative" class="row middle">
                 @if(!empty($errors->get('email_representative')[0]))<p
                         class="Form-errors">{{$errors->get('email_representative')[0]}}</p>@endif
@@ -205,14 +205,14 @@
                        value="{{$r-> email_representative}}">
                 <em>?<span>Estos datos permitirán que otros participantes en el BOmm te contacten</span></em>
             </label>
-            <label for="publicEmail" class="row middle">
+           {{-- <label for="publicEmail" class="row middle">
                 <span class="col-5 cols-12">¿Deseas que publiquemos en nuestro sitio web este dato? [Correo electrónico]:</span>
                 <select id="publicEmail" class="col-6 cols-12" name="public_email" title="Selecciona la respuesta">
                     <option value="">Selecciona...</option>
                     <option {{($r->public_email == 1) ? 'selected' : ''}} value="1">Sí</option>
                     <option {{($r->public_email == 2) ? 'selected' : ''}} value="2">No</option>
                 </select>
-            </label>
+            </label>--}}
             <label for="emailAlternativeRepresentative" class="row middle">
                 @if(!empty($errors->get('email_alternative_representative')[0]))<p
                         class="Form-errors">{{$errors->get('email_alternative_representative')[0]}}</p>@endif
@@ -220,7 +220,7 @@
                 <input class="col-6 required" type="text" id="emailAlternativeRepresentative"
                        name="email_alternative_representative" value="{{$r->email_alternative_representative }}">
             </label>
-            <label for="publicEmailAlternative" class="row middle">
+           {{-- <label for="publicEmailAlternative" class="row middle">
                 <span class="col-5 cols-12">¿Deseas que publiquemos en nuestro sitio web este dato? [Correo alternativo]:</span>
                 <select id="publicEmailAlternative" class="col-6 cols-12" name="public_email_alternative"
                         title="Selecciona la respuesta">
@@ -229,7 +229,7 @@
                     <option {{($r->public_email_alternative == 2) ? 'selected' : ''}} value="2">No</option>
                 </select>
 
-            </label>
+            </label>--}}
             <label for="smsAuthorize" class="row middle">
                 @if(!empty($errors->get('sms_authorize')[0]))<p
                         class="Form-errors">{{$errors->get('sms_authorize')[0]}}</p>@endif

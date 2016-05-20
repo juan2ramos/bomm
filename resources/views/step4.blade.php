@@ -36,7 +36,7 @@
         </p>
         <label for="terms">
             @if(!empty($errors->get('check1')[0]))<p class="Form-errors">{{$errors->get('check1')[0]}}</p>@endif
-            <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto los Términos y Condiciones de participación en el BOmm
+            <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto el Reglamento de Participación
         </label>
 
         <label for="habeasData">
