@@ -13,24 +13,9 @@
             </g>
         </g>
     </svg>
-    <h2 class="title">Envío definitivo de la inscripción</h2>
-    <div class="Progress row end middle">
-        <p>Bienvenido {{Auth::user()->nombre }}<br>
-            <span> Finalización</span>
-        </p>
-    </div>
-    <form action="{{route('stepsFinishPost')}}" enctype="multipart/form-data" method="post" id="upload_form"
-          class="steps Form-inputs Terms">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
-        <p>Haz clic en "Confirmar inscripción" para enviar tu solicitud. Al hacerlo, entiendes que NO podrás editar, borrar ni adjuntar más información a tu cuenta y que el jurado recibirá tu inscripción tal y como la has elaborado hasta este punto. Recibirás un correo electrónico notificando tu inscripción definitiva al BOmm "Bogotá Music Market".
-
-        <div class="col-12 row ">
-            <a href="{{route('stepFour')}}" class="Button">Regresar</a>
-            <input type="submit" value="Confirmar inscripción" name="submit" class="Button offset-6">
-            <a href="{{url('logout')}}" class="Button offset-1">Continuar más tarde</a>
-        </div>
-    </form>
+  <p>Hemos recibido su inscripción la cual está siendo evaluada.
+      Por favor esté atento a la publicación de los resultados, en la página web de <a href="http://bogotamusicmarket.com">bogotamusicmarket.com</a></p>
 @endsection
 @section('scripts')
     <script src="{{asset('js/images.js')}}"></script>

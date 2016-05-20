@@ -43,7 +43,10 @@ Route::get('paso_final', [
     'as' => 'stepsFinish'
 ])->middleware('step:4');
 
-
+Route::post('paso_final', [
+    'uses' => 'GroupController@finish',
+    'as' => 'stepsFinishPost'
+])->middleware('step:4');
 
 Route::post('uploadPdfArtist', [
     'uses' => 'GroupController@uploadPdfArtist',

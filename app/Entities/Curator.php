@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Curator extends Model
 {
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
-    public function curators(){
-        return $this->belongsTo(Group::class);
+    public function groups(){
+        return $this->hasMany(Group::class);
     }
 }

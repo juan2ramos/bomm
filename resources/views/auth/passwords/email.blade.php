@@ -6,7 +6,7 @@
 
 
         <h2 class="title">Restaurar contraseña</h2>
-        <form class="steps Form-inputs Terms" role="form" method="POST" action="{{ url('/password/email') }}">
+        <form class="steps Form-inputs Terms" role="form" method="POST" action="{{ route('passwordEmailPost') }}">
             {!! csrf_field() !!}
             @if (session('status'))
                 <div class="alert alert-success">

@@ -7,6 +7,7 @@ use Bomm\Entities\Group;
 use Bomm\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use Bomm\Http\Controllers\Controller;
@@ -59,7 +60,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users|confirmed',
             'password' => 'required|min:6|confirmed',
             'accept' => 'required',
-        ],[
+        ], [
             'name.required' => 'El campo nombre es obligatorio',
             'accept.required' => 'Debes aceptar las condiciones',
             'email.required' => 'El campo Email es obligatorio',
@@ -99,6 +100,8 @@ class AuthController extends Controller
                 'fecha_registro' => new Carbon(),
                 'id_grupos_musica' => $group->id
             ]);
+
+
         return $user;
     }
 
@@ -106,7 +109,7 @@ class AuthController extends Controller
     {
         Auth::Logout();
         Session::flush();
-        return redirect('/');
+        return route('/');
     }
 
     /**
@@ -116,7 +119,15 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        if(Auth::user()->role == 3){
+
+        if (Auth::user()->role == 3) {
+            $g = Auth::user()->group()->first();
+            if(!is_null($g) && $g->call()->whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL')->first()){
+                Auth::Logout();
+                Session::flush();
+                return route('isFinish');
+            }
+
             if (!is_null($group = Auth::user()->musics()->first())) {
                 Session::put('idGroup', $group->id);
                 Session::put('antique', 1);
@@ -133,7 +144,7 @@ class AuthController extends Controller
              * esto solo sucede una sola ves con usuarios antiguos que no tienen grupo
              *
              * */
-            $group  = Group::create(['name' => Auth::user()->nombre, 'user_id' => Auth::user()->id]);
+            $group = Group::create(['name' => Auth::user()->nombre, 'user_id' => Auth::user()->id]);
             Call::create(
                 [
                     'inscripcion_inicial' => '2000',
@@ -158,17 +169,11 @@ class AuthController extends Controller
 
         $user = $this->create($request->all());
 
-        /*if($user->role_id == 3){
-            $agent = Agent::with('providers')->get()->sortBy(function($agent){return $agent->providers()->count();})->first();
-            $provider = new Provider;
-            $provider->agent_id = $agent->id;
-            $provider->user_id = $user->id;
-            $provider->save();
-        }
-
         Mail::send('emails.welcome', ['user' => $user], function ($m) use ($user) {
-            $m->to($user->email, $user->name)->subject('Bienvenido!');
-        });*/
+            $m->from('artistas@bogotamusicmarket.com', 'bogotamusicmarket');
+            $m->to($user->email, $user->name)->subject('Cuenta nueva BOMM2016!');
+            $m->bcc('artistas@bogotamusicmarket.com');
+        });
 
         auth()->loginUsingId($user->id);
         return redirect($this->redirectPath());

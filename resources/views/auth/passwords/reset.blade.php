@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <form class="steps Form-inputs Terms" role="form" method="POST" class="steps Form-inputs " action="{{ url('/password/reset') }}">
+        <form class="steps Form-inputs Terms" role="form" method="POST" class="steps Form-inputs " action="{{ route('passwordResetPost') }}">
             {!! csrf_field() !!}
 
             <input type="hidden" name="token" value="{{ $token }}">

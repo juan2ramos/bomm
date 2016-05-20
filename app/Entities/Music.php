@@ -29,5 +29,8 @@ class Music extends Model
 
     }
 
+    public function related(){
+        return $this->hasOne(Related::class, 'id_grupo_musica');
+    }
 
 }

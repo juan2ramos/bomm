@@ -1,7 +1,6 @@
 @extends('layouts.front')
 
 @section('content')
-
     <p class="requiredInfo">Los campos marcados con * son necesarios</p>
     <div class="row ContentForms">
         <form action="{{route('register')}}" method="POST" class="col-6 cols-12">
@@ -84,7 +83,7 @@
                 </label>
                 <button class="offset-3 Button">Ingresar</button>
             </div>
-            <p>Si has olvidado tus datos, haz clic <a href="/password/email">aquí</a> para recordar.</p>
+            <p>Si has olvidado tus datos, haz clic <a href="{{route('passwordEmail')}}">aquí</a> para recordar.</p>
         </form>
         <p class=" offset-5 Info-p" >
             Para cualquier duda puedes contactarnos al siguiente correo electrónico:

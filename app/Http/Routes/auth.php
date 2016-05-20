@@ -27,9 +27,29 @@ Route::post('registro', [
     ]
 );
 // Password reset link request routes...
-Route::get('password/email', 'Auth\PasswordController@getEmail');
-Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+Route::post('registro', [
+        'uses' => 'Auth\AuthController@postRegister',
+        'as' => 'register'
+    ]
+);
+
+Route::get('password/email', [
+        'uses' => 'Auth\PasswordController@getEmail',
+        'as' => 'passwordEmail'
+    ]
+);
+Route::post('password/email', [
+    'uses' => 'Auth\PasswordController@postEmail',
+    'as' => 'passwordEmailPost'
+]);
 
 // Password reset routes...
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+Route::get('password/reset/{token}', [
+    'uses' => 'Auth\PasswordController@getReset',
+    'as' => 'passwordReset'
+]);
+Route::post('password/reset', [
+    'uses' => 'Auth\PasswordController@postReset',
+    'as' => 'passwordResetPost'
+]);

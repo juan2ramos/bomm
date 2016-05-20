@@ -4,21 +4,25 @@ namespace Bomm\Http\Controllers;
 
 use Bomm\Entities\Call;
 use Bomm\Entities\Country;
+use Bomm\Entities\Curator;
 use Bomm\Entities\Group;
 use Bomm\Entities\Music;
 use Bomm\Entities\Related;
 use Bomm\Entities\Representative;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use Bomm\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class GroupController extends Controller
 {
     private $validator;
+
     public function uploadPdfArtist(Request $request)
     {
         $imageName = str_random(40) . '**' . $request->file('pdf')->getClientOriginalName();
@@ -35,10 +39,10 @@ class GroupController extends Controller
     public function stepOnePost(Request $request)
     {
         $group = $this->getGroupNew();
-        $return = $this->saveStepOne($request, $group);
-
         if (Session::get('antique'))
             $this->createCallStepOne($group);
+        $return = $this->saveStepOne($request, $group);
+
 
         return ($return == 'back') ? back() : ($return == 'error') ? back()->withErrors($this->validator) : redirect()->route('stepTwo');
 
@@ -76,12 +80,15 @@ class GroupController extends Controller
      *  */
     private function createCallStepOne($group)
     {
+
         $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
         if (is_null($call)) {
 
+
             $music = Auth::user()->musics()->first();
-            $callAnt = Call::whereRaw('id_grupos_musica = ' . $music->id . ' and convocatoria != 2016 ')->first();
-            if (is_null($callAnt)) {
+
+            if (is_null($music)) {
+
                 Call::create([
                     'inscripcion_inicial' => '2016',
                     'convocatoria' => '2016',
@@ -89,12 +96,23 @@ class GroupController extends Controller
                     'id_grupos_musica' => $group->id
                 ]);
             } else {
-                Call::create([
-                    'inscripcion_inicial' => $callAnt->inscripcion_inicial,
-                    'convocatoria' => '2016',
-                    'fecha_registro' => new Carbon(),
-                    'id_grupos_musica' => $group->id,
-                ]);
+                $callAnt = Call::whereRaw('id_grupos_musica = ' . $music->id)->first();
+                if (is_null($callAnt)) {
+                    Call::create([
+                        'inscripcion_inicial' => '2016',
+                        'convocatoria' => '2016',
+                        'fecha_registro' => new Carbon(),
+                        'id_grupos_musica' => $group->id
+                    ]);
+                } else {
+                    Call::create([
+                        'inscripcion_inicial' => $callAnt->inscripcion_inicial,
+                        'convocatoria' => '2016',
+                        'fecha_registro' => new Carbon(),
+                        'id_grupos_musica' => $group->id,
+                    ]);
+                }
+
             }
         }
     }
@@ -141,21 +159,21 @@ class GroupController extends Controller
             'instagram' => 'required_without:facebook,twitter',
 
             /*  required_without*/
-        ],[
-            'name.required'=> 'El campo nombre es requerido',
-            'short_review.required'=> 'El campo reseña es requerido',
-            'short_review_en.required'=> 'El campo reseña ingles es requerido',
-            'type_proposal.required'=> 'El campo tipo de propuesta es requerido',
-            'genre.required'=> 'El campo genero es requerido',
-            'pdf.required'=> 'El campo pdf es requerido',
-            'manager.required'=> 'El campo manager es requerido',
+        ], [
+            'name.required' => 'El campo nombre es requerido',
+            'short_review.required' => 'El campo reseña es requerido',
+            'short_review_en.required' => 'El campo reseña ingles es requerido',
+            'type_proposal.required' => 'El campo tipo de propuesta es requerido',
+            'genre.required' => 'El campo genero es requerido',
+            'pdf.required' => 'El campo pdf es requerido',
+            'manager.required' => 'El campo manager es requerido',
             'image.required' => 'La imagen es requerida',
-            'showcases.required'=> 'El campo Indica si quieres que tu propuesta sea evaluada para participar en los showcases es requerido',
+            'showcases.required' => 'El campo Indica si quieres que tu propuesta sea evaluada para participar en los showcases es requerido',
 
         ]);
         if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
-            $call->step = ($call->step > 1) ? $call->step : 1 ;
+            $call->step = ($call->step > 1) ? $call->step : 1;
             $call->save();
             return 'next';
         } else {
@@ -163,6 +181,9 @@ class GroupController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function stepTwo()
     {
         $countries = Country::orderBy('nombre')->get();
@@ -170,15 +191,17 @@ class GroupController extends Controller
 
         $r = Auth::user()->representative()->first();
 
-        if (!$r) {
-            $r = (Session::get('antique'))?
-                Auth::user()->group()->select('id')->first()->related()->first()->normalizeData():
-                new Representative();
+        if (!$r && Session::get('antique')) {
+            $music = Auth::user()->musics()->select('id')->first();
+            $r = (!$music) ? new Representative() :
+                ( $related = $music->related()->first() ) ? $related->normalizeData() : new Representative();
+
         }
         return view('step2', compact('countries', 'step', 'r'));
     }
 
-    public function stepTwoPost(Request $request)
+    public
+    function stepTwoPost(Request $request)
     {
 
         $data = $request->all();
@@ -202,7 +225,9 @@ class GroupController extends Controller
         return back();
 
     }
-    private function continueStepToThree($data)
+
+    private
+    function continueStepToThree($data)
     {
         $validator = Validator::make($data, [
             'name_representative' => 'required',
@@ -226,35 +251,34 @@ class GroupController extends Controller
             'is_company' => 'required',
 
 
-        ],[
-            'name_representative.required'=> 'El campo Nombre(s) de la persona que va en representación es requerido',
-            'last_name_representative.required'=> 'El campo Apellido(s) es requerido',
-            'identification_representative.required'=> 'El campo Tipo de documento de identificación es requerido',
-            'identification_number_representative.required'=> 'El campo Número de identificación es requerido',
-            'gender_representative.required'=> 'El campo Género es requerido',
-            'day_representative.required'=> 'El campo Selecciona el día es requerido',
-            'month_representative.required'=> 'El campo Selecciona el mes es requerido',
-            'year_representative.required'=> 'El campo Selecciona el año es requerido',
-            'country_representative.required'=> 'El campo País es requerido',
-            'state_representative.required'=> 'El campo Departamento es requerido',
-            'city_representative.required'=> 'El campo Ciudad requerido',
-            'image_representative.required'=> 'La imagen es requerida',
-            'address_Representative.required'=> 'El campo Dirección es requerido',
-            'phone_Representative.required'=> 'El campo Teléfono fijo es requerido',
-            'email_representative.required'=> 'El campo Correo electrónico es requerido',
-            'email_representative.email'=> 'El campo correo electronico es invalido',
-            'email_alternative_representative.required'=> 'El campo Correo alternativo es requerido',
-            'email_alternative_representative.email'=> 'El campo correo electronico alternativo es invalido',
-            'sms_authorize.required'=> 'El campo ¿Autorizas el envío de mensajes de texto a tu celular? es requerido',
-            'level_education_representative.required'=> 'El campo Nivel de estudios es requerido',
-            'is_company.required'=> 'El campo ¿Vienes en representación de una empresa? es requerido',
-
+        ], [
+            'name_representative.required' => 'El campo Nombre(s) de la persona que va en representación es requerido',
+            'last_name_representative.required' => 'El campo Apellido(s) es requerido',
+            'identification_representative.required' => 'El campo Tipo de documento de identificación es requerido',
+            'identification_number_representative.required' => 'El campo Número de identificación es requerido',
+            'gender_representative.required' => 'El campo Género es requerido',
+            'day_representative.required' => 'El campo Selecciona el día es requerido',
+            'month_representative.required' => 'El campo Selecciona el mes es requerido',
+            'year_representative.required' => 'El campo Selecciona el año es requerido',
+            'country_representative.required' => 'El campo País es requerido',
+            'state_representative.required' => 'El campo Departamento es requerido',
+            'city_representative.required' => 'El campo Ciudad requerido',
+            'image_representative.required' => 'La imagen es requerida',
+            'address_Representative.required' => 'El campo Dirección es requerido',
+            'phone_Representative.required' => 'El campo Teléfono fijo es requerido',
+            'email_representative.required' => 'El campo Correo electrónico es requerido',
+            'email_representative.email' => 'El campo correo electronico es invalido',
+            'email_alternative_representative.required' => 'El campo Correo alternativo es requerido',
+            'email_alternative_representative.email' => 'El campo correo electronico alternativo es invalido',
+            'sms_authorize.required' => 'El campo ¿Autorizas el envío de mensajes de texto a tu celular? es requerido',
+            'level_education_representative.required' => 'El campo Nivel de estudios es requerido',
+            'is_company.required' => 'El campo ¿Vienes en representación de una empresa? es requerido',
 
 
         ]);
         if (!$validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
-            $call->step = ($call->step > 2) ?$call->step : 2 ;
+            $call->step = ($call->step > 2) ? $call->step : 2;
             $call->save();
             return redirect()->route('stepThree');
         } else {
@@ -262,13 +286,16 @@ class GroupController extends Controller
         }
     }
 
-    public function stepThree()
+    public
+    function stepThree()
     {
         $step = 3;
         $group = $this->getGroup();
-        return view('step3', compact('step','group'));
+        return view('step3', compact('step', 'group'));
     }
-    public function stepThreePost(Request $request)
+
+    public
+    function stepThreePost(Request $request)
     {
         $data = $request->all();
         $group = $this->getGroup();
@@ -283,9 +310,11 @@ class GroupController extends Controller
             return $this->continueStepToFour($data);
         return back();
 
-        return view('step3', compact('step','group'));
+        return view('step3', compact('step', 'group'));
     }
-    private function continueStepToFour($data)
+
+    private
+    function continueStepToFour($data)
     {
 
         $this->validator = Validator::make($data, [
@@ -297,15 +326,15 @@ class GroupController extends Controller
             'video2' => 'required_without_all:video1,video3',
             'video3' => 'required_without_all:video1,video2',
 
-        ],[
-            'producer.required'=> 'El campo  Productor(es)  es requerido',
-            'producer.max'=> 'no máximo de 500 caracteres',
+        ], [
+            'producer.required' => 'El campo  Productor(es)  es requerido',
+            'producer.max' => 'no máximo de 500 caracteres',
 
         ]);
 
         if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
-            $call->step = ($call->step > 3) ?$call->step : 3 ;
+            $call->step = ($call->step > 3) ? $call->step : 3;
             $call->save();
             return redirect()->route('stepFour');
         } else {
@@ -313,13 +342,16 @@ class GroupController extends Controller
         }
     }
 
-    public function stepFour()
+    public
+    function stepFour()
     {
         $step = 4;
         $group = $this->getGroup();
-        return view('step4', compact('step','group'));
+        return view('step4', compact('step', 'group'));
     }
-    public function stepFourPost(Request $request)
+
+    public
+    function stepFourPost(Request $request)
     {
         $data = $request->all();
         $group = $this->getGroup();
@@ -333,23 +365,25 @@ class GroupController extends Controller
             return $this->continueStepToFinish($data);
         return back();
 
-        return view('step4', compact('step','group'));
+        return view('step4', compact('step', 'group'));
     }
-    private function continueStepToFinish($data)
+
+    private
+    function continueStepToFinish($data)
     {
         $this->validator = Validator::make($data, [
             'check1' => 'required',
             'check2' => 'required',
 
-        ],[
-            'check1.required'=> 'Debes haber leído  Términos y Condiciones',
-            'check2.required'=> 'Debes autorizar el tratamiento de datos',
+        ], [
+            'check1.required' => 'Debes haber leído  Términos y Condiciones',
+            'check2.required' => 'Debes autorizar el tratamiento de datos',
 
         ]);
 
         if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
-            $call->step = ($call->step > 4) ?$call->step : 4 ;
+            $call->step = ($call->step > 4) ? $call->step : 4;
             $call->save();
             return redirect()->route('stepsFinish');
         } else {
@@ -358,15 +392,42 @@ class GroupController extends Controller
     }
 
 
+    public function finish()
+    {
+        $user = Auth::user();
+        $group = $user->group()->first();
+        $call = $group->call()->first();
+        $call->fecha_finalizacion = Carbon::now();
+        $call->save();
+
+        $curator = Curator::with('groups')->get()->sortBy(function ($curator) {
+            return $curator->groups()->count();
+        })->first();
+
+        $curator->groups()->save($group);
+
+
+        Mail::send('emails.finish', ['user' => $user], function ($m) use ($user) {
+            $m->from('artistas@bogotamusicmarket.com', 'bogotamusicmarket');
+            $m->to($user->email, $user->name)->subject('Culminación inscripción BOMM2016');
+            $m->bcc('artistas@bogotamusicmarket.com');
+        });
+        Auth::Logout();
+        Session::flush();
+        return view('finish');
+
+    }
+
     public function stepsFinish()
     {
         $step = 4;
-        return view('stepsFinish',compact('step'));
+        return view('stepsFinish', compact('step'));
     }
 
-    private function callReturn($step){
+    private function callReturn($step)
+    {
         $call = Auth::user()->group()->first()->call()->first();
-        $call->step =  $step ;
+        $call->step = $step;
         $call->save();
     }
 
