@@ -1,0 +1,6 @@
+{
+    "require": {
+        "jenssegers/date": "^3.2",
+        "barryvdh/laravel-dompdf": "^0.6.1"
+    }
+}

@@ -36,7 +36,8 @@
         </p>
         <label for="terms">
             @if(!empty($errors->get('check1')[0]))<p class="Form-errors">{{$errors->get('check1')[0]}}</p>@endif
-            <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto el Reglamento de Participación
+            <input type="checkbox"  {{$group->check1 == 'on' ?'checked':''}} name="check1" id="terms"> * He leído y acepto el
+                <a style="color:#be0f34" href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf">Reglamento de Participación</a>
         </label>
 
         <label for="habeasData">
@@ -45,7 +46,7 @@
         </label>
 
         <div class="row col-12">
-            <a href="{{route('stepThree')}}" class="Button">Regresar</a>
+            <a target="_blank" href="{{route('stepThree')}}" class="Button">Regresar</a>
             <input type="submit" value="CONTINUAR" name="submit" class="Button offset-9">
         </div>
     </form>

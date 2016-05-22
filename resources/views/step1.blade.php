@@ -165,11 +165,13 @@
 
                 </label>
                 <label for="twitter" class="row middle">
+                    @if(!empty($errors->get('twitter')[0]))<p class="Form-errors">{{$errors->get('twitter')[0]}}</p>@endif
                     <span class="col-5 cols-12"><input type="checkbox" style="width: 20px">* Twitter</span>
                     <input class="col-6" type="text" id="twitter" name="twitter" value="{{$group->twitter}}">
                     <em>? <span>Recuerda que la dirección de tu twitter debe estar de esta forma @XXXXXX</span></em>
                 </label>
                 <label for="instagram" class="row middle">
+                    @if(!empty($errors->get('instagram')[0]))<p class="Form-errors">{{$errors->get('instagram')[0]}}</p>@endif
                     <span class="col-5 cols-12"> <input type="checkbox" style="width: 20px">* Instagram</span>
                     <input class="col-6" type="text" id="instagram" name="instagram" value="{{$group->instagram}}">
                     <em>? <span>Recuerda que la dirección de tu instagram debe estar de esta forma @XXXXXX </span></em>

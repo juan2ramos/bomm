@@ -109,7 +109,7 @@ class AuthController extends Controller
     {
         Auth::Logout();
         Session::flush();
-        return route('/');
+        return redirect('/dashboard');
     }
 
     /**

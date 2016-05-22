@@ -80,8 +80,10 @@ class GroupController extends Controller
      *  */
     private function createCallStepOne($group)
     {
+        $call = null;
+        if(is_null($group))
+            $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
 
-        $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
         if (is_null($call)) {
 
 
@@ -112,6 +114,7 @@ class GroupController extends Controller
                         'id_grupos_musica' => $group->id,
                     ]);
                 }
+
 
             }
         }
@@ -155,8 +158,8 @@ class GroupController extends Controller
             'manager' => 'required',
 
             'facebook' => 'required_without:twitter,instagram',
-            'twitter' => 'required_without:facebook,instagram',
-            'instagram' => 'required_without:facebook,twitter',
+            'twitter' => ['required_without:facebook,instagram','regex:/(^|\s)@(\w+)/'],
+            'instagram' => ['required_without:facebook,twitter','regex:/(^|\s)@(\w+)/'],
 
             /*  required_without*/
         ], [
@@ -169,7 +172,8 @@ class GroupController extends Controller
             'manager.required' => 'El campo manager es requerido',
             'image.required' => 'La imagen es requerida',
             'showcases.required' => 'El campo Indica si quieres que tu propuesta sea evaluada para participar en los showcases es requerido',
-
+            'twitter.regex' => 'El usuario debe ser de la forma @xxxxx',
+            'instagram.regex' => 'El usuario debe ser de la forma @xxxxx',
         ]);
         if (!$this->validator->fails()) {
             $call = Auth::user()->group()->first()->call()->first();
