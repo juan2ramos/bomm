@@ -196,10 +196,13 @@ class GroupController extends Controller
 
         $r = Auth::user()->representative()->first();
 
-        if (!$r && Session::get('antique')) {
-            $music = Auth::user()->musics()->select('id')->first();
-            $r = (!$music) ? new Representative() :
-                ( $related = $music->related()->first() ) ? $related->normalizeData() : new Representative();
+        if (!$r) {
+            if(Session::get('antique')){
+                $music = Auth::user()->musics()->select('id')->first();
+                $r = (!$music) ? new Representative() : $music->related()->first()->normalizeData();
+            }else{
+                $r = new Representative();
+            }
 
         }
         return view('step2', compact('countries', 'step', 'r'));

@@ -119,7 +119,6 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-
         if (Auth::user()->role == 3) {
             $g = Auth::user()->group()->first();
             if(!is_null($g) && $g->call()->whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL')->first()){
@@ -170,6 +169,7 @@ class AuthController extends Controller
         $user = $this->create($request->all());
 
         Mail::send('emails.welcome', ['user' => $user], function ($m) use ($user) {
+
             $m->from('artistas@bogotamusicmarket.com', 'bogotamusicmarket');
             $m->to($user->email, $user->name)->subject('Cuenta nueva BOMM2016!');
             $m->bcc('artistas@bogotamusicmarket.com');
