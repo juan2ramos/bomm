@@ -136,7 +136,8 @@ class GroupController extends Controller
         $group->fill($data);
         Auth::user()->group()->save($group);
 
-        $this->callReturn(0);
+        if(Auth::user()->group()->first()->call()->first())
+            $this->callReturn(0);
 
         if ($next == 'CONTINUAR')
             return $this->continueStepToTwo($data);
