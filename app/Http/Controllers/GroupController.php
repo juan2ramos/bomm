@@ -199,7 +199,17 @@ class GroupController extends Controller
         if (!$r) {
             if(Session::get('antique')){
                 $music = Auth::user()->musics()->select('id')->first();
-                $r = (!$music) ? new Representative() : $music->related()->first()->normalizeData();
+                if (!$music){
+                    $r =  new Representative();
+                }else{
+
+                    if( !$music->related()->first() ){
+                        $r = new Representative();
+                    }else{
+                        $r = $music->related()->first()->normalizeData();
+                    }
+
+                }
             }else{
                 $r = new Representative();
             }
