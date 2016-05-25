@@ -12,7 +12,7 @@
                 <p><b>Paso 1:</b> Lee el reglamento y acéptalo para seguir con el paso 2</p>
                 <p style="margin-left: 48px;"><input name="accept" id="accept" type="checkbox"> <label for="accept">
                         He leído y acepto el
-                        <a href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf" target="_blank">
+                        <a href="{{url('images/ReglamentoBOmm2016v2.pdf')}}" target="_blank">
                             Reglamento de Participación
                         </a>
                     </label>
