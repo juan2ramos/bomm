@@ -346,3 +346,19 @@ hr {
 .opacity{
   opacity: .5;
 }
+.Table{
+  width: 800px;
+  text-align: center;
+  thead{
+    color: white;
+    background: grey;
+  }
+  td,th{
+    padding: 10px;
+  }
+  tr{
+    &:nth-child(even){
+      background: #E7E7E7;
+    }
+  }
+}

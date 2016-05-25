@@ -4,6 +4,7 @@ namespace Bomm\Entities;
 
 use Bomm\User;
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 class Group extends Model
 {
@@ -19,5 +20,9 @@ class Group extends Model
     }
     public function curator(){
         return $this->belongsTo(Curator::class);
+    }
+    public function getDateHumanAttribute(){
+        $date = new Date($this->created_at);
+        return $date->format('l j F Y');
     }
 }

@@ -3,6 +3,7 @@
 namespace Bomm\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 class Call extends Model
 {
@@ -15,8 +16,18 @@ class Call extends Model
         'step',
     ];
 
-    function Music(){
-        return $this->belongsTo(Music::class,'id_grupos_musica');
+    function Music()
+    {
+        return $this->belongsTo(Music::class, 'id_grupos_musica');
+    }
+
+    public function getDateHumanAttribute()
+    {
+        if ($this->fecha_finalizacion) {
+            $date = new Date($this->fecha_finalizacion);
+            return $date->format('l j F Y');
+        }
+        return '';
     }
 
 }

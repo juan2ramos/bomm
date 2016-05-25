@@ -654,4 +654,15 @@ hr {
 .opacity {
   opacity: .5; }
 
+.Table {
+  width: 800px;
+  text-align: center; }
+  .Table thead {
+    color: white;
+    background: grey; }
+  .Table td, .Table th {
+    padding: 10px; }
+  .Table tr:nth-child(even) {
+    background: #E7E7E7; }
+
 /*# sourceMappingURL=style.css.map */

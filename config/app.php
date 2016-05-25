@@ -155,6 +155,7 @@ return [
         Bomm\Providers\AuthServiceProvider::class,
         Bomm\Providers\EventServiceProvider::class,
         Bomm\Providers\RouteServiceProvider::class,
+        'Jenssegers\Date\DateServiceProvider',
 
     ],
 
@@ -202,6 +203,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];

@@ -25,7 +25,7 @@
         <div class="Header-route">
             <a href="http://www.bogotamusicmarket.com/">Inicio</a> <span> > </span> Información BOmm
         </div>
-        @if(Auth::check())
+        @if(Auth::check() && Auth::user()->role == 3)
             <a class="Logout" href="{{route('logout')}}">Cerrar sesión[X]</a>
 
         <ul class="row middle Steps">

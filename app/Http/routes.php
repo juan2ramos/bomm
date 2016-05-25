@@ -8,6 +8,8 @@ Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home'])->middleware(
 Route::get('registrados',['as' => 'isFinish',function(){
     return view('isFinish');
 }]);
+Route::get('usuarios',['as' => 'users','uses'=>'ReportController@users']);
+Route::get('usuario/{id}',['as' => 'user','uses'=>'ReportController@user']);
 
 
 

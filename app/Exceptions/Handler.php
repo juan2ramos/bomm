@@ -45,6 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+           return back();
+        }
         if (app()->environment() == 'production') {
             return response()->view('errors.500', [], 500);
         }

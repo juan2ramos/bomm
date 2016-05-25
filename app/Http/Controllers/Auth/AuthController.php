@@ -119,6 +119,7 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
+
         if (Auth::user()->role == 3) {
             $g = Auth::user()->group()->first();
             if(!is_null($g) && $g->call()->whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL')->first()){
