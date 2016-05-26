@@ -654,14 +654,24 @@ hr {
 .opacity {
   opacity: .5; }
 
-.Table {
-  width: 800px;
-  text-align: center; }
-  .Table thead {
+table {
+  margin: 1.875rem 0; }
+  table td {
+    border: 0.0625rem solid #efefef; }
+  table thead {
     color: white;
     background: grey; }
-  .Table td, .Table th {
+  table td, table th {
     padding: 10px; }
+  table .red {
+    background: #be0f34;
+    color: white; }
+
+.Table {
+  width: 56.25rem;
+  text-align: center; }
+  .Table td {
+    border: none; }
   .Table tr:nth-child(even) {
     background: #E7E7E7; }
 

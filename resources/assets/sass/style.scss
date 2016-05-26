@@ -346,9 +346,11 @@ hr {
 .opacity{
   opacity: .5;
 }
-.Table{
-  width: 800px;
-  text-align: center;
+table{
+  margin: rem(30) 0;
+  td{
+    border: rem(1) solid #efefef;
+  }
   thead{
     color: white;
     background: grey;
@@ -356,6 +358,20 @@ hr {
   td,th{
     padding: 10px;
   }
+  .red{
+    background: #be0f34;
+    color: white;
+  }
+
+}
+.Table{
+  td{
+    border: none;
+  }
+  width: rem(900);
+  text-align: center;
+
+
   tr{
     &:nth-child(even){
       background: #E7E7E7;

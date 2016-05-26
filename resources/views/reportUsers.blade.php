@@ -15,15 +15,59 @@
     </svg>
     <h2 class="title">Reporte usuarios</h2>
 
-    <div style="margin: auto;width:800px">
+    <div style="margin: auto;width:900px">
+
+        <div class="row">
+            <div class="col-4">
+            <table >
+                <thead>
+                <tr>
+                    <th>Año</th>
+                    <th>Inscritos</th>
+                    <th>Finalizados</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="red">2013</td>
+                    <td>{{$thirteen}}</td>
+                    <td>{{$thirteenFinish}}</td>
+                </tr>
+                <tr>
+                    <td class="red">2014</td>
+                    <td>{{$fourteen}}</td>
+                    <td>{{$fourteenFinish}}</td>
+                </tr>
+                <tr>
+                    <td class="red">2015</td>
+                    <td>{{$fifteen}}</td>
+                    <td>{{$fifteenFinish}}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <table class="col-5">
+                <tr>
+                    <td class="red">Inscritos</td>
+                    <td>{{$registers}}</td>
+                </tr>
+                <tr>
+                    <td class="red">Inscritos finalizados</td>
+                    <td>{{$finish}}</td>
+                </tr>
+            </table>
+
+
+        </div>
+
         <table class="Table">
             <thead>
             <tr>
                 <th>id</th>
                 <th>Nombre</th>
-                <th>Año inscripción </th>
+                <th>Año inscripción</th>
                 <th>Fecha de inscripción</th>
-                <th>Fecha de Finalizacion </th>
+                <th>Fecha de Finalizacion</th>
                 <th>Formulario</th>
                 <th>Ver datos</th>
             </tr>
