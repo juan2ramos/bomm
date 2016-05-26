@@ -18,9 +18,9 @@
     <div style="margin: 20px auto;width:900px; display:flex ">
         <div style="padding: 10px; width: 50%">
             <h2>Datos básicos</h2>
-            <p><img src="{{$group->name}}" alt=""> </p>
-            <p>Nombre del grupo: {{url('uploads/photoGroups'.$group->name)}}</p>
-  Ç          <p>Tipo de propuesta: {{$group->type_proposal}}</p>
+            <p><img src="{{url('uploads/photoGroups'.$group->name)}}" alt=""></p>
+            <p>Nombre del grupo: {{$group->name}}</p>
+            <p>Tipo de propuesta: {{$group->type_proposal}}</p>
             <p style="text-align: justify">Reseña: {{$group->short_review}}</p>
             <p style="text-align: justify">Reseña Ingles: {{$group->short_review_en}}</p>
             <p>Género: {{$group->genre}}</p>
@@ -45,32 +45,32 @@
 
         </div>
         @if($representative)
-        <div style="padding: 10px; width: 50%">
+            <div style="padding: 10px; width: 50%">
 
-            <h2>Datos representante</h2>
-            <p>Nombre(s) de la persona que va en representación: {{ $representative->name_representative }}</p>
-            <p>Foto representante: {{ {{url('uploads/photoRepresentative/'.$representative->image_representative)}}  }}</p>
-            <p>Apellido(s): {{ $representative->last_name_representative }}</p>
-            <p>Tipo de documento de identificación: {{ $representative->identification_representative }}</p>
-            <p>Número de identificación: {{ $representative->identification_number_representative }}</p>
-            <p>Género{{ $representative->gender_representative }}</p>
-            <p> Fecha de nacimiento {{ $representative->day_representative }}
-                /{{ $representative->month_representative }}
-                /{{ $representative->year_representative }}</p>
-            <p>País: {{ $representative->country_representative }}</p>
-            <p>Departamento:{{ $representative->state_representative }}</p>
-            <p>Ciudad:{{ $representative->city_representative }}</p>
-            <p>Dirección:{{ $representative->address_Representative }}</p>
-            <p>Teléfono fijo:{{ $representative->phone_Representative }}</p>
-            <p>Teléfono celular:{{ $representative->mobile_representative }}</p>
-            <p>Correo electrónico:{{ $representative->email_representative }}</p>
-            <p>Correo alternativo {{ $representative->email_alternative_representative }}</p>
-            <p>Nivel de estudios:{{ $representative->level_education_representative }}</p>
-            <p>¿Vienes en representación de una empresa?:{{ $representative->is_company }}</p>
-            <p>Nombre de la Empresa:{{ $representative->company_representative }}</p>
-            <p>NIT:{{ $representative->nit_company }}</p>
-            <p>¿Qué cargo tienes en la empresa?{{ $representative->position_company }}</p>
-        </div>
+                <h2>Datos representante</h2>
+                <p>Nombre(s) de la persona que va en representación: {{ $representative->name_representative }}</p>
+                <p><img src="{{url('uploads/photoRepresentative/'.$representative->image_representative)}}" alt=""></p>
+                <p>Apellido(s): {{ $representative->last_name_representative }}</p>
+                <p>Tipo de documento de identificación: {{ $representative->identification_representative }}</p>
+                <p>Número de identificación: {{ $representative->identification_number_representative }}</p>
+                <p>Género{{ $representative->gender_representative }}</p>
+                <p> Fecha de nacimiento {{ $representative->day_representative }}
+                    /{{ $representative->month_representative }}
+                    /{{ $representative->year_representative }}</p>
+                <p>País: {{ $representative->country_representative }}</p>
+                <p>Departamento:{{ $representative->state_representative }}</p>
+                <p>Ciudad:{{ $representative->city_representative }}</p>
+                <p>Dirección:{{ $representative->address_Representative }}</p>
+                <p>Teléfono fijo:{{ $representative->phone_Representative }}</p>
+                <p>Teléfono celular:{{ $representative->mobile_representative }}</p>
+                <p>Correo electrónico:{{ $representative->email_representative }}</p>
+                <p>Correo alternativo {{ $representative->email_alternative_representative }}</p>
+                <p>Nivel de estudios:{{ $representative->level_education_representative }}</p>
+                <p>¿Vienes en representación de una empresa?:{{ $representative->is_company }}</p>
+                <p>Nombre de la Empresa:{{ $representative->company_representative }}</p>
+                <p>NIT:{{ $representative->nit_company }}</p>
+                <p>¿Qué cargo tienes en la empresa?{{ $representative->position_company }}</p>
+            </div>
         @endif
     </div>
     <div class="row col-12">
