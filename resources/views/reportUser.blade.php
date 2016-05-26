@@ -18,7 +18,7 @@
     <div style="margin: 20px auto;width:900px; display:flex ">
         <div style="padding: 10px; width: 50%">
             <h2>Datos básicos</h2>
-            <p><img src="{{url('uploads/photoGroups'.$group->name)}}" alt=""></p>
+            <p><img src="{{url('uploads/photoGroups/'.$group->photo)}}" alt=""></p>
             <p>Nombre del grupo: {{$group->name}}</p>
             <p>Tipo de propuesta: {{$group->type_proposal}}</p>
             <p style="text-align: justify">Reseña: {{$group->short_review}}</p>
