@@ -156,6 +156,7 @@ return [
         Bomm\Providers\EventServiceProvider::class,
         Bomm\Providers\RouteServiceProvider::class,
         'Jenssegers\Date\DateServiceProvider',
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -205,6 +206,7 @@ return [
 
 
         'Date' => Jenssegers\Date\Date::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

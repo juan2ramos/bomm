@@ -9,6 +9,7 @@ Route::get('registrados',['as' => 'isFinish',function(){
     return view('isFinish');
 }]);
 Route::get('usuarios',['as' => 'users','uses'=>'ReportController@users']);
+Route::get('usuarios-excel',['as' => 'usersExcel','uses'=>'ReportController@usersExcel']);
 Route::get('usuario/{id}',['as' => 'user','uses'=>'ReportController@user']);
 
 
