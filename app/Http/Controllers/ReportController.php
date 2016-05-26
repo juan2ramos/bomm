@@ -20,19 +20,19 @@ class ReportController extends Controller
         $groups = Group::whereHas('call', function ($query) {
             $query->whereRaw('convocatoria = 2016');
 
-        })->where('id', '>' ,'31')->with('call')->get();
+        })->whereRaw('id > 31')->with('call')->get();
 
         $registers = Group::where('id', '>' ,'31')->count();
-        $finish = Call::whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL ')->count();
-        $thirteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 ')->count();
-        $fourteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 ')->count();
-        $fifteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 ')->count();
-        $sixteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 ')->count();
+        $finish = Call::whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL and id_grupos_musica > 31')->toSql();
+        $thirteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and id_grupos_musica > 31 ')->count();
+        $fourteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and id_grupos_musica > 31 ')->count();
+        $fifteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and id_grupos_musica > 31 ')->count();
+        $sixteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and id_grupos_musica > 31 ')->count();
 
-        $thirteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and fecha_finalizacion IS NOT NULL')->count();
-        $fourteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and fecha_finalizacion IS NOT NULL')->count();
-        $fifteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and fecha_finalizacion IS NOT NULL')->count();
-        $sixteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and fecha_finalizacion IS NOT NULL')->count();
+        $thirteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $fourteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $fifteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $sixteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
 
         return view('reportUsers', compact('groups', 'step','registers','finish',
             'thirteen','fourteen','fifteen','sixteen', 'thirteenFinish','fourteenFinish','fifteenFinish','sixteenFinish'));
