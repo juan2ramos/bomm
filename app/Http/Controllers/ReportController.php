@@ -19,7 +19,7 @@ class ReportController extends Controller
         $groups = Group::whereHas('call', function ($query) {
             $query->whereRaw('convocatoria = 2016');
 
-        })->with('call')->get();
+        })->where('id', '>' ,'32')->with('call')->get();
 
         $registers = Group::where('id', '>' ,'32')->count();
         $finish = Call::whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL ')->count();
