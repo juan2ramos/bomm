@@ -675,4 +675,7 @@ table {
   .Table tr:nth-child(even) {
     background: #E7E7E7; }
 
+.excel g {
+  fill: #0FBE1E; }
+
 /*# sourceMappingURL=style.css.map */
