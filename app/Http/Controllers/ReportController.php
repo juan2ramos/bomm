@@ -54,10 +54,10 @@ class ReportController extends Controller
                 $sheet->setCellValue('E2', 'Inscritos');
                 $sheet->setCellValue('E3', 'Inscritos finalizados');
 
-                $sheet->setCellValue('A2', '2013');
-                $sheet->setCellValue('A3', '2014');
+                $sheet->setCellValue('A3', '2013');
                 $sheet->setCellValue('A4', '2014');
-                $sheet->setCellValue('A5', '2016');
+                $sheet->setCellValue('A5', '2014');
+                $sheet->setCellValue('A6', '2016');
 
 
                 $registers = Group::where('id', '>', '31')->count();
