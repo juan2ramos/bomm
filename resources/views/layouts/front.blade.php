@@ -25,20 +25,26 @@
         <div class="Header-route">
             <a href="http://www.bogotamusicmarket.com/">Inicio</a> <span> > </span> Información BOmm
         </div>
-        @if(Auth::check() && Auth::user()->role == 3)
+        @if(Auth::check() )
             <a class="Logout" href="{{route('logout')}}">Cerrar sesión[X]</a>
-
-        <ul class="row middle Steps">
-            <li>pasos de <br>Inscripción</li>
-            <li><a class="{{($step == 1)? 'current':''}}" href="{{route('dashboard')}}">Datos básicos artista o grupo</a></li>
-            <li><a class="{{($step == 2)? 'current':''}}" href="{{route('stepTwo')}}">Datos representante rueda de negocios </a></li>
-            <li><a class="{{($step == 3)? 'current':''}}" href="{{route('stepThree')}}">Grabaciones</a></li>
-            <li><a class="{{($step == 4)? 'current':''}}" href="{{route('stepFour')}}">Aceptación términos y condiciones </a></li>
-        </ul>
+            @if(Auth::user()->role == 3)
+                <ul class="row middle Steps">
+                    <li>pasos de <br>Inscripción</li>
+                    <li><a class="{{($step == 1)? 'current':''}}" href="{{route('dashboard')}}">Datos básicos artista o
+                            grupo</a></li>
+                    <li><a class="{{($step == 2)? 'current':''}}" href="{{route('stepTwo')}}">Datos representante rueda
+                            de negocios </a></li>
+                    <li><a class="{{($step == 3)? 'current':''}}" href="{{route('stepThree')}}">Grabaciones</a></li>
+                    <li><a class="{{($step == 4)? 'current':''}}" href="{{route('stepFour')}}">Aceptación términos y
+                            condiciones </a></li>
+                </ul>
+            @endif
         @endif
         <div class="Header-bar row middle end">
             @if(Auth::check())
-                <a class="Logout" href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf" target="_blank">Reglamento de participación</a>
+                <a class="Logout"
+                   href="http://www.bogotamusicmarket.com/images/phocadownload/Reglamento_BOmm%202016%20v1.pdf"
+                   target="_blank">Reglamento de participación</a>
             @endif
         </div>
     </header>

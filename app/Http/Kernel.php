@@ -55,5 +55,6 @@ class Kernel extends HttpKernel
         'guest' => \Bomm\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'step' => \Bomm\Http\Middleware\StepMiddleware::class,
+        'admin' => \Bomm\Http\Middleware\Admin::class,
     ];
 }

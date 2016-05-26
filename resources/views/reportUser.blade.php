@@ -18,10 +18,11 @@
     <div style="margin: 20px auto;width:900px; display:flex ">
         <div style="padding: 10px; width: 50%">
             <h2>Datos básicos</h2>
-            <p>Nombre del grupo: {{$group->name}}</p>
-            <p>Tipo de propuesta: {{$group->type_proposal}}</p>
+            <p><img src="{{$group->name}}" alt=""> </p>
+            <p>Nombre del grupo: {{url('uploads/photoGroups'.$group->name)}}</p>
+  Ç          <p>Tipo de propuesta: {{$group->type_proposal}}</p>
             <p style="text-align: justify">Reseña: {{$group->short_review}}</p>
-            <p style="text-align: justify">Reseña Ingles: {{$group->short_review}}</p>
+            <p style="text-align: justify">Reseña Ingles: {{$group->short_review_en}}</p>
             <p>Género: {{$group->genre}}</p>
             <p>Facebook:{{$group->facebook}}</p>
             <p>Twitter: {{$group->twitter}}</p>
@@ -29,7 +30,7 @@
             <p>¿Cuánto cuesta tu show en vivo? {{$group->show_cost}}</p>
             <p>Manager o representante: {{$group->manager}}</p>
             <p>Propuesta sea evaluada para participar en los showcases: {{$group->showcases}}</p>
-            <p>Pdf: <a href="{{$group->pdf}}"></a></p>
+            <p>Pdf: <a target="_blank" href="{{url('uploads/pdfGroups/'.$group->pdf)}}">VER</a></p>
             <p>Website: {{$group->website}}</p>
             <p>Recibiendo servicios empresariales de la Cámara de Comercio {{$group->services}}</p>
 
@@ -48,7 +49,7 @@
 
             <h2>Datos representante</h2>
             <p>Nombre(s) de la persona que va en representación: {{ $representative->name_representative }}</p>
-            <p>Foto representante: {{ $representative->image_representative }}</p>
+            <p>Foto representante: {{ {{url('uploads/photoRepresentative/'.$representative->image_representative)}}  }}</p>
             <p>Apellido(s): {{ $representative->last_name_representative }}</p>
             <p>Tipo de documento de identificación: {{ $representative->identification_representative }}</p>
             <p>Número de identificación: {{ $representative->identification_number_representative }}</p>
