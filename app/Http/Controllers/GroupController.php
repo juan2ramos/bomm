@@ -38,7 +38,7 @@ class GroupController extends Controller
 
     public function stepOnePost(Request $request)
     {
-        $group = $this->getGroupNew();
+        $group = $this->getGroupNew($request);
         if (Session::get('antique'))
             $this->createCallStepOne($group);
         $return = $this->saveStepOne($request, $group);
@@ -62,11 +62,23 @@ class GroupController extends Controller
      * Si el usuario no tiene grupo y es antiguo le crea
      *
      *  */
-    private function getGroupNew()
+    private function getGroupNew($request)
     {
-        if (is_null($group = Group::where('user_id', Auth::user()->id)->first()) && Session::get('antique')) {
-            return new Group();
+        $group = Group::where('user_id', Auth::user()->id)->first();
+
+        if (is_null($group) && Session::get('antique')) {
+            $group = new Group();
         }
+        $data = $request->all();
+        if ($request->hasFile('photoGroup')) {
+            $imageName = str_random(40) . '**' . $request->file('photoGroup')->getClientOriginalName();
+            $request->file('photoGroup')->move(base_path() . '/public/uploads/photoGroups/', $imageName);
+            $data['image'] = $imageName;
+        }
+
+        unset($data['submit'], $data['photoGroup'], $data['pdfArtist']);
+        $group->fill($data);
+        Auth::user()->group()->save($group);
         return $group;
     }
 
@@ -80,10 +92,7 @@ class GroupController extends Controller
      *  */
     private function createCallStepOne($group)
     {
-        $call = null;
-        if(is_null($group))
-            $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
-
+        $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
         if (is_null($call)) {
 
 
@@ -97,16 +106,19 @@ class GroupController extends Controller
                     'fecha_registro' => new Carbon(),
                     'id_grupos_musica' => $group->id
                 ]);
+
             } else {
-                $callAnt = Call::whereRaw('id_grupos_musica = ' . $music->id)->first();
+
+                $callAnt = Call::whereRaw('id_grupos_musica = ' . $music->id . ' and convocatoria = 2016 ')->first();
                 if (is_null($callAnt)) {
-                    Call::create([
+                    $d = Call::create([
                         'inscripcion_inicial' => '2016',
                         'convocatoria' => '2016',
                         'fecha_registro' => new Carbon(),
                         'id_grupos_musica' => $group->id
                     ]);
                 } else {
+
                     Call::create([
                         'inscripcion_inicial' => $callAnt->inscripcion_inicial,
                         'convocatoria' => '2016',
@@ -126,18 +138,9 @@ class GroupController extends Controller
     private function saveStepOne($request, $group)
     {
         $data = $request->all();
-        if ($request->hasFile('photoGroup')) {
-            $imageName = str_random(40) . '**' . $request->file('photoGroup')->getClientOriginalName();
-            $request->file('photoGroup')->move(base_path() . '/public/uploads/photoGroups/', $imageName);
-            $data['image'] = $imageName;
-        }
         $next = $data['submit'];
-        unset($data['submit'], $data['photoGroup'], $data['pdfArtist']);
-        $group->fill($data);
-        Auth::user()->group()->save($group);
 
-        if(Auth::user()->group()->first()->call()->first())
-            $this->callReturn(0);
+        $this->callReturn(0);
 
         if ($next == 'CONTINUAR')
             return $this->continueStepToTwo($data);
@@ -159,8 +162,8 @@ class GroupController extends Controller
             'manager' => 'required',
 
             'facebook' => 'required_without:twitter,instagram',
-            'twitter' => ['required_without:facebook,instagram','regex:/(^|\s)@(\w+)/'],
-            'instagram' => ['required_without:facebook,twitter','regex:/(^|\s)@(\w+)/'],
+            'twitter' => ['required_without:facebook,instagram', 'regex:/(^|\s)@(\w+)/'],
+            'instagram' => ['required_without:facebook,twitter', 'regex:/(^|\s)@(\w+)/'],
 
             /*  required_without*/
         ], [
@@ -197,20 +200,21 @@ class GroupController extends Controller
         $r = Auth::user()->representative()->first();
 
         if (!$r) {
-            if(Session::get('antique')){
+            if (Session::get('antique')) {
                 $music = Auth::user()->musics()->select('id')->first();
-                if (!$music){
-                    $r =  new Representative();
-                }else{
+                if (!$music) {
+                    $r = new Representative();
+                } else {
 
-                    if( !$music->related()->first() ){
+                    if (!$music->related()->first()) {
                         $r = new Representative();
-                    }else{
-                        $r = $music->related()->first()->normalizeData();
+                    } else {
+
                     }
 
                 }
-            }else{
+
+            } else {
                 $r = new Representative();
             }
 
@@ -444,7 +448,8 @@ class GroupController extends Controller
 
     private function callReturn($step)
     {
-        $call = Auth::user()->group()->first()->call()->first();
+        $musicId = Auth::user()->group()->first()->id;
+        $call = Call::whereRaw('id_grupos_musica = ' . $musicId . ' and convocatoria = 2016 ')->first();
         $call->step = $step;
         $call->save();
     }
