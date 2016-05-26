@@ -18,7 +18,9 @@
     <div style="margin: 20px auto;width:900px; display:flex ">
         <div style="padding: 10px; width: 50%">
             <h2>Datos básicos</h2>
-            <p><img src="{{url('uploads/photoGroups/'.$group->image)}}" alt=""></p>
+            @if($group->image)
+                <p><img src="{{url('uploads/photoGroups/'.$group->image)}}" alt=""></p>
+            @endif
             <p>Nombre del grupo: {{$group->name}}</p>
             <p>Tipo de propuesta: {{$group->type_proposal}}</p>
             <p style="text-align: justify">Reseña: {{$group->short_review}}</p>
@@ -30,7 +32,8 @@
             <p>¿Cuánto cuesta tu show en vivo? {{$group->show_cost}}</p>
             <p>Manager o representante: {{$group->manager}}</p>
             <p>Propuesta sea evaluada para participar en los showcases: {{$group->showcases}}</p>
-            <p>Pdf: <a target="_blank" href="{{url('uploads/pdfGroups/'.$group->pdf)}}">VER</a></p>
+            <p>Pdf: @if($group->pdf)<a target="_blank" href="{{url('uploads/pdfGroups/'.$group->pdf)}}">VER</a>@endif
+            </p>
             <p>Website: {{$group->website}}</p>
             <p>Recibiendo servicios empresariales de la Cámara de Comercio {{$group->services}}</p>
 
@@ -49,7 +52,10 @@
 
                 <h2>Datos representante</h2>
                 <p>Nombre(s) de la persona que va en representación: {{ $representative->name_representative }}</p>
-                <p><img src="{{url('uploads/photoRepresentative/'.$representative->image_representative)}}" alt=""></p>
+                @if($representative->image_representative)
+                    <p><img src="{{url('uploads/photoRepresentative/'.$representative->image_representative)}}" alt="">
+                    </p>
+                @endif
                 <p>Apellido(s): {{ $representative->last_name_representative }}</p>
                 <p>Tipo de documento de identificación: {{ $representative->identification_representative }}</p>
                 <p>Número de identificación: {{ $representative->identification_number_representative }}</p>
