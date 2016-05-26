@@ -26,12 +26,15 @@ class ReportController extends Controller
         $thirteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 ')->count();
         $fourteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 ')->count();
         $fifteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 ')->count();
+        $sixteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 ')->count();
 
         $thirteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and fecha_finalizacion IS NOT NULL')->count();
         $fourteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and fecha_finalizacion IS NOT NULL')->count();
         $fifteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and fecha_finalizacion IS NOT NULL')->count();
+        $sixteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and fecha_finalizacion IS NOT NULL')->count();
 
-        return view('reportUsers', compact('groups', 'step','registers','finish', 'thirteen','fourteen','fifteen', 'thirteenFinish','fourteenFinish','fifteenFinish'));
+        return view('reportUsers', compact('groups', 'step','registers','finish',
+            'thirteen','fourteen','fifteen','sixteen', 'thirteenFinish','fourteenFinish','fifteenFinish','sixteenFinish'));
 
 
     }
