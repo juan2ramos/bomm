@@ -13,6 +13,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('usuarios', ['as' => 'users', 'uses' => 'ReportController@users']);
     Route::get('usuarios-excel', ['as' => 'usersExcel', 'uses' => 'ReportController@usersExcel']);
     Route::get('usuario/{id}', ['as' => 'user', 'uses' => 'ReportController@user']);
+    Route::post('usuario', ['as' => 'changePassword', 'uses' => 'ReportController@changePassword']);
 
 });
 

@@ -140,4 +140,12 @@ class ReportController extends Controller
         $call = Call::whereRaw('id_grupos_musica = ' . $group->id . ' and convocatoria = 2016 ')->first();
         return view('reportUser', compact('group', 'step', 'representative', 'call'));
     }
+    public function changePassword(Request $request){
+        $id = $request->input('idUser');
+        $user = User::find($id);
+        $user->password = bcrypt($request->input('password'));
+;
+        $user->save();
+        return back()->with('success');
+    }
 }

@@ -22,6 +22,7 @@
                 <p><img src="{{url('uploads/photoGroups/'.$group->image)}}" alt=""></p>
             @endif
             <p>Nombre del grupo: {{$group->name}}</p>
+            <p>Email: {{$group->user()->first()->email}}</p>
             <p>Tipo de propuesta: {{$group->type_proposal}}</p>
             <p style="text-align: justify">Reseña: {{$group->short_review}}</p>
             <p style="text-align: justify">Reseña Ingles: {{$group->short_review_en}}</p>
@@ -79,6 +80,13 @@
             </div>
         @endif
     </div>
+    <form method="post" action="{{route('changePassword')}}">
+        <label for="">Nueva contraseña</label>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+        <input type="hidden" name="idUser" value="{{$group->user_id}}">
+        <input type="password" name="password">
+        <button class="Button">Cambiar contraseña</button>
+    </form>
     <div class="row col-12">
         <a href="{{route('users')}}" class="Button">Regresar</a>
     </div>
