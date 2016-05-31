@@ -209,7 +209,7 @@ class GroupController extends Controller
                     if (!$music->related()->first()) {
                         $r = new Representative();
                     } else {
-
+                        $r = $music->related()->first();
                     }
 
                 }
