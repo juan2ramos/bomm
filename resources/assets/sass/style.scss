@@ -383,3 +383,32 @@ table{
     fill: #0FBE1E;
   }
 }
+.title-h3{
+  color: #fff;
+  background-color: #be0f34;
+  width: 100%;
+  padding: rem(5);
+  margin: rem(10) 0;
+  font-weight: normal;
+}
+.Evaluation{
+  div{
+    margin: rem(10) 0;
+  }
+  input{
+    margin: 0 rem(2) 0 rem(3);
+  }
+}
+.Menu-evaluation{
+  background-color: #f0f0f0;
+  padding: 25px;
+  border-radius: 5px;
+  position: relative;
+  top: -9px;
+  a{
+    display: block;
+    color: #be0f34;
+    margin: rem(10) 0;
+    text-decoration: underline;
+  }
+}

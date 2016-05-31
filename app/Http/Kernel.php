@@ -56,5 +56,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'step' => \Bomm\Http\Middleware\StepMiddleware::class,
         'admin' => \Bomm\Http\Middleware\Admin::class,
+        'curator' => \Bomm\Http\Middleware\Curator::class,
     ];
 }

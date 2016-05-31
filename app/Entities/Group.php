@@ -18,6 +18,9 @@ class Group extends Model
     public function related(){
         return $this->hasOne(Related::class, 'id_grupo_musica');
     }
+    public function score(){
+        return $this->hasOne(Score::class);
+    }
     public function curator(){
         return $this->belongsTo(Curator::class);
     }

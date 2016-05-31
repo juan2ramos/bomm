@@ -123,6 +123,9 @@ class AuthController extends Controller
         if (Auth::user()->role == 1) {
             return route('users');
         }
+        if (Auth::user()->role == 2) {
+            return route('usersCurator');
+        }
 
         if (Auth::user()->role == 3) {
             $g = Auth::user()->group()->first();

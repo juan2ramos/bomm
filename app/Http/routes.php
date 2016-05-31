@@ -16,4 +16,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('usuario', ['as' => 'changePassword', 'uses' => 'ReportController@changePassword']);
 
 });
+Route::group(['middleware' => ['curator']], function () {
+
+    Route::get('usuarios-curador', ['as' => 'usersCurator', 'uses' => 'CuratorController@showUsers']);
+    Route::get('usuarios-curador/{view}/{id}', ['as' => 'userCurator', 'uses' => 'CuratorController@showUser']);
+    Route::post('usuarios-curador', ['as' => 'userCuratorSave', 'uses' => 'CuratorController@showUserSave']);
+});
 
