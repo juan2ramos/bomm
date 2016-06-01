@@ -704,4 +704,18 @@ table {
     margin: 0.625rem 0;
     text-decoration: underline; }
 
+.pagination {
+  text-align: center; }
+  .pagination li {
+    display: inline-block; }
+  .pagination a {
+    display: block;
+    background: #be0f34;
+    padding: 0.3125rem 0.5rem;
+    color: white; }
+  .pagination .disabled, .pagination .active {
+    padding: 0.3125rem 0.5rem;
+    color: #f5f5f5;
+    background: #CCCCCC; }
+
 /*# sourceMappingURL=style.css.map */

@@ -14,7 +14,6 @@
         </g>
     </svg>
     <h2 class="title">Reporte usuarios</h2>
-
     <div style="margin: auto;width:900px">
 
         <div class="row">
@@ -52,6 +51,7 @@
                 </table>
             </div>
             <div class="col-7">
+
                 <table>
                     <tr>
                         <td class="red">Inscritos</td>
@@ -82,7 +82,11 @@
             </div>
 
         </div>
-
+        <form method="post" action="{{route('searchUser')}}" class="row end" style="margin-bottom: 2rem ">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+            <input style="padding-left: 5px" type="text" placeholder="Buscar por usuario" name="search" >
+            <button class="Button">Buscar</button>
+        </form>
         <table class="Table">
             <thead>
             <tr>
@@ -109,6 +113,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! $groups->render() !!}
     </div>
 
 

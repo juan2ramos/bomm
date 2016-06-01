@@ -14,6 +14,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('usuarios-excel', ['as' => 'usersExcel', 'uses' => 'ReportController@usersExcel']);
     Route::get('usuario/{id}', ['as' => 'user', 'uses' => 'ReportController@user']);
     Route::post('usuario', ['as' => 'changePassword', 'uses' => 'ReportController@changePassword']);
+    Route::post('usuario-busqueda', ['as' => 'searchUser', 'uses' => 'ReportController@searchUser']);
 
 });
 Route::group(['middleware' => ['curator']], function () {

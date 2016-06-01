@@ -21,7 +21,33 @@ class ReportController extends Controller
             $query->whereRaw(' convocatoria = 2016  and id_grupos_musica > 31 ');
         })->with(['call' => function ($q) {
             $q->whereRaw(' convocatoria = 2016  and id_grupos_musica > 31 ');
-        }])->orderBy('id', 'desc')->get();
+        }])->orderBy('id', 'desc')->paginate(20);
+
+        $registers = Group::where('id', '>', '31')->count();
+        $finish = Call::whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL and id_grupos_musica > 31')->count();
+        $thirteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and id_grupos_musica > 31 ')->count();
+        $fourteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and id_grupos_musica > 31 ')->count();
+        $fifteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and id_grupos_musica > 31 ')->count();
+        $sixteen = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and id_grupos_musica > 31 ')->count();
+
+        $thirteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2013 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $fourteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2014 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $fifteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2015 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+        $sixteenFinish = Call::whereRaw('convocatoria = 2016 and inscripcion_inicial = 2016 and id_grupos_musica > 31 and fecha_finalizacion IS NOT NULL')->count();
+
+        return view('reportUsers', compact('groups', 'step', 'registers', 'finish',
+            'thirteen', 'fourteen', 'fifteen', 'sixteen', 'thirteenFinish', 'fourteenFinish', 'fifteenFinish', 'sixteenFinish'));
+    }
+
+    public function searchUser(Request $request)
+    {
+        $step = '';
+
+        $groups = Group::whereHas('call', function ($query) {
+            $query->whereRaw(' convocatoria = 2016  and id_grupos_musica > 31 ');
+        })->with(['call' => function ($q) {
+            $q->whereRaw(' convocatoria = 2016  and id_grupos_musica > 31 ');
+        }])->orderBy('id', 'desc')->whereRaw('name like "%'. $request->input('search') .'%" ')->paginate(20);
 
         $registers = Group::where('id', '>', '31')->count();
         $finish = Call::whereRaw('convocatoria = 2016 and fecha_finalizacion IS NOT NULL and id_grupos_musica > 31')->count();
