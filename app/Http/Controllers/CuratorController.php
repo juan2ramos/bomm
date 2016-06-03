@@ -59,7 +59,13 @@ class CuratorController extends Controller
                     $group->facebook = $porciones[$size];
                 }
             }
+        }
+        if($group->instagram){
+            $instagram = substr($group->instagram,1);
 
+            $html = file_get_contents('https://www.instagram.com/'.$instagram);
+            preg_match('/\"followed_by\"\:\s?\{\"count\"\:\s?([0-9]+)/',$html,$m);
+            $group->instagram = intval($m[1]);
         }
 
         $title = ['presentation' => 'Presentación','musica' => 'Música','social' => 'Redes','videos' => 'Videos'];

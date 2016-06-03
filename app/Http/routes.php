@@ -25,7 +25,8 @@ Route::group(['middleware' => ['curator']], function () {
 });
 Route::get('juan', function()
 {
-    $t = Twitter::getFollowersIds(['screen_name' => 'juan2ramos', ' count' => '10000']);
-    dd(count($t->ids));
+
+
+
 });
 
