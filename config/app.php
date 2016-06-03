@@ -157,7 +157,7 @@ return [
         Bomm\Providers\RouteServiceProvider::class,
         'Jenssegers\Date\DateServiceProvider',
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        'Thujohn\Twitter\TwitterServiceProvider',
     ],
 
     /*
@@ -207,6 +207,7 @@ return [
 
         'Date' => Jenssegers\Date\Date::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
     ],
 
 ];
