@@ -128,7 +128,7 @@
                     <div class="row middle">
                         <div class="col-3">a. Calidad artística</div>
                         <div class="col-9">
-                            @for($i=0;$i <= 15; $i++)
+                            @for($i=0;$i <= 25; $i++)
                                 <input type="radio" name="artistic_quality" value="{{$i}}">{{$i}}
                             @endfor
                         </div>
@@ -144,7 +144,7 @@
                     <div class="row middle">
                         <div class="col-3">c. Calidad de producción</div>
                         <div class="col-9">
-                            @for($i=0;$i <= 15; $i++)
+                            @for($i=0;$i <= 10; $i++)
                                 <input {{(isset($score->production_quality_music ) && $score->production_quality_music == $i )?'checked':''}}
                                        type="radio" name="production_quality_music" value="{{$i}}">{{$i}}
                             @endfor
@@ -154,7 +154,7 @@
                     <div class="row middle">
                         <div class="col-3">d. Potencial comercial</div>
                         <div class="col-9">
-                            @for($i=0;$i <= 15; $i++)
+                            @for($i=0;$i <= 10; $i++)
                                 <input type="radio" name="market_potential" value="{{$i}}">{{$i}}
                             @endfor
                         </div>
@@ -164,34 +164,30 @@
                 <h3 class="title-h3">2. Videos</h3>
                 <div class="Evaluation">
                     <div class="row middle">
-                        <div class="col-3">a. Calidad de producción</div>
+                        <div class="col-3">a. Calidad  artística</div>
                         <div class="col-9">
-                            @for($i=0;$i <= 5; $i++)
+                            @for($i=0;$i <= 10; $i++)
                                 <input type="radio" name="production_quality_video" value="{{$i}}">{{$i}}
                             @endfor
                         </div>
                     </div>
-                    <div class="row middle">
-                        <div class="col-3"> b. Dirección artística</div>
-                        <div class="col-9">
-                            @for($i=0;$i <= 5; $i++)
-                                <input type="radio" name="artistic_direction" value="{{$i}}">{{$i}}
-                            @endfor
-                        </div>
-                    </div>
+
 
                 </div>
                 <h3 class="title-h3">3. Redes</h3>
                 <div class="Evaluation">
                     <figure><img style="margin: auto" src="{{url('images/redes.jpg')}}" alt=""></figure>
-                    <div class="row middle">
-                        <div class="col-3">a. Facebook</div>
-                        <div class="col-9">
-                            @for($i=0;$i <= 5; $i++)
-                                <input type="radio" name="facebook" value="{{$i}}">{{$i}}
-                            @endfor
-                        </div>
-                    </div>
+                    @if($group->facebook)
+                      <div class="row middle">
+                          <div class="col-3">a. Facebook</div>
+                          <div class="col-9">
+                              @for($i=0;$i <= 5; $i++)
+                                  <input type="radio" name="facebook" value="{{$i}}">{{$i}}
+                              @endfor
+                          </div>
+                      </div>
+                    @endif
+                    @if($group->twitter)
                     <div class="row middle">
                         <div class="col-3"> b. Twitter</div>
                         <div class="col-9">
@@ -200,15 +196,17 @@
                             @endfor
                         </div>
                     </div>
+                  @endif
+                  @if($group->twitter)
                     <div class="row middle">
                         <div class="col-3">c. Instagram</div>
                         <div class="col-9">
                             @for($i=0;$i <= 5; $i++)
                                 <input type="radio" name="instagram" value="{{$i}}">{{$i}}
-                            @endfor
+                @endfor
                         </div>
                     </div>
-
+                  @endif
                 </div>
                 <h3 class="title-h3">4. Presentación</h3>
                 <div class="Evaluation">
@@ -373,13 +371,3 @@ $('#rever').html('<iframe src="{{$group->audio2}}" width="100%" height="400px" f
         @endif
     </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
